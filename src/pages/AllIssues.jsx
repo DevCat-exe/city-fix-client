@@ -41,7 +41,7 @@ const AllIssues = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Header */}
         <motion.div
@@ -191,8 +191,8 @@ const AllIssues = () => {
                           key={pageNum}
                           onClick={() => setPage(pageNum)}
                           className={`w-10 h-10 rounded-lg font-semibold transition-all ${page === pageNum
-                              ? "bg-primary text-white shadow-lg shadow-primary/30"
-                              : "bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-slate-700"
+                            ? "bg-primary text-white shadow-lg shadow-primary/30"
+                            : "bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-slate-700"
                             }`}
                         >
                           {pageNum}

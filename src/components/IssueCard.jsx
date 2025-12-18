@@ -90,7 +90,7 @@ const IssueCard = ({ issue }) => {
             className="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110"
             style={{ backgroundImage: `url("${issue.images[0]}")` }}
           ></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
           {issue.isBoosted && (
             <div className="absolute top-3 right-3 flex items-center gap-1 px-2.5 py-1 rounded-full bg-yellow-400 text-yellow-900 text-xs font-bold shadow-lg">
               <MdLocalFireDepartment className="text-sm" />
@@ -99,7 +99,7 @@ const IssueCard = ({ issue }) => {
           )}
         </div>
       )}
-      <div className="p-6 flex flex-col flex-grow">
+      <div className="p-6 flex flex-col grow">
         <div className="flex items-center gap-2 mb-2">
           <span className="inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary border border-primary/20">
             {issue.category}
@@ -151,7 +151,7 @@ const IssueCard = ({ issue }) => {
         </div>
         <Link
           to={`/issues/${issue._id}`}
-          className="mt-auto w-full flex items-center justify-center gap-2 rounded-xl h-11 px-4 bg-gradient-to-r from-primary to-blue-600 text-white text-sm font-semibold hover:from-primary/90 hover:to-blue-600/90 transition-all shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30"
+          className="mt-auto w-full flex items-center justify-center gap-2 rounded-xl h-11 px-4 bg-linear-to-r from-primary to-blue-600 text-white text-sm font-semibold hover:from-primary/90 hover:to-blue-600/90 transition-all shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30"
         >
           <span>View Details</span>
           <MdArrowForward className="text-base" />
