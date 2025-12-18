@@ -1,5 +1,31 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "../layouts/RootLayout";
+import AuthLayout from "../layouts/AuthLayout";
+import Home from "../pages/Home";
+import AllIssues from "../pages/AllIssues";
+import IssueDetails from "../pages/IssueDetails";
+import Login from "../pages/auth/Login";
+import Signup from "../pages/auth/Signup";
+import AboutUs from "../pages/AboutUs";
+import ContactUs from "../pages/ContactUs";
+import NotFound from "../pages/NotFound";
+import ProtectedRoute from "../components/ProtectedRoute";
+// Dashboard Components
+import CitizenDashboard from "../pages/dashboard/Citizen/CitizenDashboard";
+import CitizenOverview from "../pages/dashboard/Citizen/CitizenOverview";
+import MyIssues from "../pages/dashboard/Citizen/MyIssues";
+import ReportIssue from "../pages/dashboard/Citizen/ReportIssue";
+import CitizenProfile from "../pages/dashboard/Citizen/CitizenProfile";
+import StaffDashboard from "../pages/dashboard/Staff/StaffDashboard";
+import StaffOverview from "../pages/dashboard/Staff/StaffOverview";
+import AssignedIssues from "../pages/dashboard/Staff/AssignedIssues";
+import StaffProfile from "../pages/dashboard/Staff/StaffProfile";
+import AdminDashboard from "../pages/dashboard/Admin/AdminDashboard";
+import AdminOverview from "../pages/dashboard/Admin/AdminOverview";
+import ManageAllIssues from "../pages/dashboard/Admin/ManageAllIssues";
+import ManageUsers from "../pages/dashboard/Admin/ManageUsers";
+import ManageStaff from "../pages/dashboard/Admin/ManageStaff";
+import PaymentsPage from "../pages/dashboard/Admin/PaymentsPage";
 
 export const router = createBrowserRouter([
   {
