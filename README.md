@@ -4,8 +4,8 @@ A modern, responsive platform for reporting and managing public infrastructure i
 
 ## 🚀 Live Links
 
-- **Live Site:** WIP
-- **Live API:** WIP
+- **Live Site:** [Netlify](https://devcat-b12a11.netlify.app)
+- **Live API:** [OnRender](https://city-fix-server.onrender.com)
 
 ## 🔐 Admin Credentials
 
