@@ -2,3 +2,65 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 @import "tailwindcss";
+
+@plugin "daisyui" {
+    themes: light, dark;
+}
+
+@plugin "daisyui/theme" {
+    name: "light";
+    default: true;
+    --color-primary: #137fec;
+    --color-secondary: #03373D;
+    --color-success: #22C55E;
+    --color-warning: #F59E0B;
+    --color-error: #EF4444;
+    --color-background: #f6f7f8;
+    --color-foreground: #111827;
+    --color-card: #ffffff;
+    --color-card-foreground: #111827;
+    --color-border: #e0e0e0;
+    --color-text-primary: #111827;
+    --color-text-secondary: #6b7280;
+    --color-muted: #f3f4f6;
+    --color-muted-foreground: #6b7280;
+    --color-error-custom: #fa6238;
+    --font-family-display: "Public Sans", "Inter", sans-serif;
+    --border-radius: 0.25rem;
+    --border-radius-lg: 0.5rem;
+    --border-radius-xl: 0.75rem;
+    --border-radius-full: 9999px;
+}
+
+@plugin "daisyui/theme" {
+    name: "dark";
+    --color-primary: #3b82f6;
+    --color-secondary: #0f172a;
+    --color-success: #22C55E;
+    --color-warning: #F59E0B;
+    --color-error: #EF4444;
+    --color-background: #0f172a;
+    --color-foreground: #f1f5f9;
+    --color-card: #1e293b;
+    --color-card-foreground: #f1f5f9;
+    --color-border: #334155;
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #94a3b8;
+    --color-muted: #1e293b;
+    --color-muted-foreground: #94a3b8;
+    --color-error-custom: #fa6238;
+    --font-family-display: "Public Sans", "Inter", sans-serif;
+    --border-radius: 0.25rem;
+    --border-radius-lg: 0.5rem;
+    --border-radius-xl: 0.75rem;
+    --border-radius-full: 9999px;
+}
+
+body {
+    font-family: 'Public Sans', sans-serif;
+    margin: 0;
+}
+
+.dark {
+    color-scheme: dark;
+}
