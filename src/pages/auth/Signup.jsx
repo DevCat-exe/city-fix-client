@@ -44,6 +44,7 @@ const Signup = () => {
         if (result && result.user) {
           // Sync with backend
           const token = await result.user.getIdToken();
+          localStorage.setItem("firebaseToken", token);
           await verifyToken(token);
           await refreshUser();
           toast.success("Account created successfully!");
@@ -95,7 +96,18 @@ const Signup = () => {
     const loadingToast = toast.loading("Creating your account...");
 
     try {
-      // Upload photo if selected
+      // 1. Create Firebase user first
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      // 2. Immediately set token in localStorage so subsequent API calls (upload, verify) are authorized
+      const token = await userCredential.user.getIdToken();
+      localStorage.setItem("firebaseToken", token);
+
+      // 3. Upload photo if selected (now authorized)
       let uploadedPhotoURL = "";
       if (photo) {
         setUploading(true);
@@ -103,22 +115,14 @@ const Signup = () => {
         uploadedPhotoURL = uploadRes.data?.data?.url || "";
       }
 
-      // Create Firebase user
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-      // Update profile with name and photo
+      // 4. Update Firebase profile with name and photo
       await updateProfile(userCredential.user, {
         displayName: name,
         photoURL: uploadedPhotoURL,
       });
 
-      // Sync with backend database
+      // 5. Sync with backend database
       toast.loading("Setting up your account...", { id: loadingToast });
-      const token = await userCredential.user.getIdToken();
       await verifyToken(token);
       await refreshUser();
 
@@ -159,6 +163,7 @@ const Signup = () => {
         // Sync with backend
         toast.loading("Setting up your account...");
         const token = await result.user.getIdToken();
+        localStorage.setItem("firebaseToken", token);
         await verifyToken(token);
         await refreshUser();
         toast.success("Account created successfully!");

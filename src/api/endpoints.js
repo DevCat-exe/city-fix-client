@@ -1,7 +1,14 @@
 import api from './axios';
 
 // Auth
-export const verifyToken = (token) => api.post('/auth/verify', { token });
+export const verifyToken = (token) => {
+  if (token) {
+    return api.post('/auth/verify', { token }, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  }
+  return api.post('/auth/verify', { token });
+};
 export const getCurrentUser = () => api.get('/users/me');
 
 // Users
