@@ -1,36 +1,125 @@
-# CityFix - Public Infrastructure Issue Reporting System
+# CityFix 🏙️  
+### Public Infrastructure Issue Reporting System
 
-A modern, responsive platform for reporting and managing public infrastructure issues. CityFix empowers citizens to take an active role in maintaining their city by reporting potholes, broken streetlights, and more.
+CityFix is a modern, responsive web platform that enables citizens to report and track public infrastructure issues such as potholes, broken streetlights, and road damage. It promotes transparency, accountability, and faster resolution through role-based workflows.
 
-## 🚀 Live Links
+---
 
-- **Live Site:** [Netlify](https://devcat-b12a11.netlify.app)
-- **Live API:** [OnRender](https://city-fix-server.onrender.com)
+## 📸 Screenshot
 
-## 🔐 Admin Credentials
+![CityFix Home](./preview.png)
+<!-- Replace with your actual screenshot filename or image URL -->
 
-- **Email:** `admin@cityfix.com`
+---
+
+## 🔗 Live Links
+
+- 🌐 **Live Site:** https://devcat-b12a11.netlify.app  
+- ⚙️ **Backend API:** https://city-fix-server.onrender.com  
+
+---
+
+## 🔐 Admin Access (Demo)
+
+> For testing and evaluation purposes
+
+- **Email:** `admin@cityfix.com`  
 - **Password:** `Admin123!`
+
+---
 
 ## ✨ Key Features
 
-1.  **Reporting Infrastructure Issues**: Easily report public issues like potholes or broken streetlights with photo evidence and location.
-2.  **Role-Based Dashboards**: Tailored experiences for Citizens, Staff, and Admins to manage and resolve issues efficiently.
-3.  **Real-Time Tracking**: A native timeline/stepper UI tracks every issue from 'Pending' to 'Resolved' and 'Closed'.
-4.  **Community Upvoting**: Logged-in users can upvote important issues to signal their community priority.
-5.  **Staff Assignment**: Admins can assign specific staff members to reports for accountability and transparency.
-6.  **Premium Subscription**: Upgrade to a premium membership (৳1000) for unlimited issue reporting and priority features.
-7.  **Boost Priority**: Users can pay a small fee (৳100) to boost an issue's priority to high, moving it to the top of lists.
-8.  **Automated Invoices**: Generate and download professional PDF invoices for all payments made on the platform.
-9.  **Advanced Search & Filter**: Powerful server-side filtering by category, status, and priority, with real-time search.
-10. **Secure Authentication**: Integrated Firebase Auth for secure Email/Password and Google Social Login.
-11. **Responsive Design**: A premium, mobile-first design built with Tailwind CSS and DaisyUI, optimized for all devices.
-12. **Interactive Animations**: Smooth transitions and entrance animations using Framer Motion (motion.react).
+- 📝 **Infrastructure Issue Reporting**  
+  Report city issues with descriptions, images, and location details.
+
+- 👥 **Role-Based Dashboards**  
+  Separate dashboards for **Citizens**, **Staff**, and **Admins**.
+
+- ⏱️ **Real-Time Issue Tracking**  
+  Visual timeline/stepper UI showing progress from *Pending → Resolved → Closed*.
+
+- 👍 **Community Upvoting**  
+  Logged-in users can upvote issues to highlight community priorities.
+
+- 🧑‍🔧 **Staff Assignment System**  
+  Admins can assign issues to specific staff members for accountability.
+
+- 💎 **Premium Membership**  
+  Premium users (৳1000) can submit unlimited reports with priority handling.
+
+- 🚀 **Priority Boosting**  
+  Users can boost an issue (৳100) to move it to the top of listings.
+
+- 🧾 **Automated Invoice Generation**  
+  Download professional PDF invoices for all payments.
+
+- 🔍 **Advanced Search & Filters**  
+  Server-side filtering by category, status, and priority with real-time search.
+
+- 🔐 **Secure Authentication**  
+  Firebase Email/Password login and Google OAuth support.
+
+- 📱 **Responsive & Modern UI**  
+  Mobile-first design using Tailwind CSS and DaisyUI.
+
+- 🎬 **Smooth Animations**  
+  Polished UI transitions and effects powered by Framer Motion.
+
+---
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React (Vite), Tailwind CSS, DaisyUI, Framer Motion
-- **State Management**: TanStack Query (React Query)
-- **Authentication**: Firebase Auth
-- **Payments**: Stripe Checkout / Payment Intent
-- **API**: Axios with Interceptors
+### Frontend
+- React (Vite)
+- Tailwind CSS
+- DaisyUI
+- Framer Motion
+
+### State Management
+- TanStack Query (React Query)
+
+### Backend & Services
+- Firebase Authentication
+- REST API (Node.js / Express)
+- Axios with interceptors
+
+### Payments
+- Stripe Checkout
+- Stripe Payment Intents
+
+---
+
+## 📦 Dependencies
+
+Major dependencies used in the project:
+
+- react
+- react-router-dom
+- @tanstack/react-query
+- firebase
+- axios
+- framer-motion
+- tailwindcss
+- daisyui
+
+(See `package.json` for the complete list)
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to run the project locally:
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/city-fix-client.git
+
+# Navigate to the project directory
+cd city-fix-client
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
