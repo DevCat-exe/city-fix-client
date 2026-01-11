@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
-import { getAllUsers, toggleBlockUser } from "../../../api/endpoints";
+import {
+  getAllUsers,
+  toggleBlockUser,
+  updateUser,
+} from "../../../api/endpoints";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { motion } from "motion/react";
@@ -14,18 +18,29 @@ const ManageUsers = () => {
     isLoading: dataLoading,
     error: queryError,
   } = useQuery({
-    queryKey: ["citizen-users"],
-    queryFn: () => getAllUsers({ role: "citizen" }),
+    queryKey: ["all-users-admin"],
+    queryFn: () => getAllUsers(),
   });
 
   const blockMutation = useMutation({
     mutationFn: (userId) => toggleBlockUser(userId),
     onSuccess: () => {
-      queryClient.invalidateQueries(["citizen-users"]);
+      queryClient.invalidateQueries(["all-users-admin"]);
       toast.success("User status updated");
     },
     onError: () => {
       toast.error("Failed to update user status");
+    },
+  });
+
+  const roleMutation = useMutation({
+    mutationFn: ({ userId, role }) => updateUser(userId, { role }),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["all-users-admin"]);
+      toast.success("User role updated successfully");
+    },
+    onError: () => {
+      toast.error("Failed to update user role");
     },
   });
 
@@ -55,13 +70,28 @@ const ManageUsers = () => {
     }
   };
 
+  const handleRoleChange = (userId, currentRole, newRole) => {
+    if (currentRole === newRole) return;
+    roleMutation.mutate({ userId, role: newRole });
+  };
+
   if (dataLoading) {
-    return <div className="text-center py-8">Loading...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
   }
 
   if (error) {
     return <div className="text-center py-8 text-red-500">{error}</div>;
   }
+
+  const filteredUsers = users.filter(
+    (user) =>
+      user.name?.toLowerCase().includes(search.toLowerCase()) ||
+      user.email?.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <motion.div
@@ -74,7 +104,7 @@ const ManageUsers = () => {
           Manage Users
         </h1>
         <p className="text-gray-600 dark:text-gray-300 mt-1">
-          View and manage citizen users
+          View and manage all system users and their roles
         </p>
       </div>
 
@@ -82,121 +112,134 @@ const ManageUsers = () => {
       <div className="mb-6">
         <input
           type="text"
-          placeholder="Search users by name or email..."
+          placeholder="Search by name or email..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#137fec]"
+          className="w-full px-4 py-3 border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-primary/50 outline-none transition-all shadow-sm"
         />
       </div>
 
       {/* Users Table */}
-      {users.length === 0 ? (
-        <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 text-center border border-gray-200 dark:border-slate-700 shadow-sm">
+      {filteredUsers.length === 0 ? (
+        <div className="bg-white dark:bg-slate-800 rounded-2xl p-12 text-center border border-gray-200 dark:border-slate-700 shadow-sm">
           <p className="text-gray-500 dark:text-gray-400">No users found</p>
         </div>
       ) : (
         <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="border-b border-gray-200 dark:border-slate-600">
+              <thead className="bg-gray-50 dark:bg-slate-900/50 border-b border-gray-200 dark:border-slate-700">
                 <tr>
-                  <th className="text-left py-4 px-6 font-semibold text-gray-900 dark:text-white">
+                  <th className="text-left py-4 px-6 font-bold text-gray-900 dark:text-white uppercase text-xs tracking-wider">
                     User
                   </th>
-                  <th className="text-left py-4 px-6 font-semibold text-gray-900 dark:text-white">
-                    Email
+                  <th className="text-left py-4 px-6 font-bold text-gray-900 dark:text-white uppercase text-xs tracking-wider">
+                    Role
                   </th>
-                  <th className="text-left py-4 px-6 font-semibold text-gray-900 dark:text-white">
+                  <th className="text-left py-4 px-6 font-bold text-gray-900 dark:text-white uppercase text-xs tracking-wider">
                     Premium
                   </th>
-                  <th className="text-left py-4 px-6 font-semibold text-gray-900 dark:text-white">
+                  <th className="text-left py-4 px-6 font-bold text-gray-900 dark:text-white uppercase text-xs tracking-wider">
                     Status
                   </th>
-                  <th className="text-left py-4 px-6 font-semibold text-gray-900 dark:text-white">
-                    Joined
+                  <th className="text-left py-4 px-6 font-bold text-gray-900 dark:text-white uppercase text-xs tracking-wider truncate">
+                    Joined Date
                   </th>
-                  <th className="text-left py-4 px-6 font-semibold text-gray-900 dark:text-white">
+                  <th className="text-right py-4 px-6 font-bold text-gray-900 dark:text-white uppercase text-xs tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-slate-600">
-                {users
-                  .filter(
-                    (user) =>
-                      user.name?.toLowerCase().includes(search.toLowerCase()) ||
-                      user.email?.toLowerCase().includes(search.toLowerCase())
-                  )
-                  .map((user) => (
-                    <tr
-                      key={user._id}
-                      className="hover:bg-gray-50 dark:hover:bg-slate-700"
-                    >
-                      <td className="py-4 px-6">
-                        <div className="flex items-center">
+              <tbody className="divide-y divide-gray-100 dark:divide-slate-700">
+                {filteredUsers.map((user) => (
+                  <tr
+                    key={user._id}
+                    className="hover:bg-gray-50/50 dark:hover:bg-slate-700/50 transition-colors"
+                  >
+                    <td className="py-4 px-6">
+                      <div className="flex items-center">
+                        <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold overflow-hidden">
                           {user.photoURL ? (
                             <img
                               src={user.photoURL}
-                              alt={user.name}
-                              className="h-10 w-10 rounded-full object-cover mr-3"
+                              alt=""
+                              className="h-full w-full object-cover"
                             />
                           ) : (
-                            <div className="h-10 w-10 rounded-full bg-[#137fec] flex items-center justify-center text-white font-semibold mr-3">
-                              {user.name?.charAt(0)?.toUpperCase()}
-                            </div>
+                            user.name?.charAt(0).toUpperCase()
                           )}
-                          <div>
-                            <div className="font-medium text-gray-900 dark:text-white">
-                              {user.name}
-                            </div>
+                        </div>
+                        <div className="ml-3">
+                          <div className="font-semibold text-gray-900 dark:text-white">
+                            {user.name}
+                          </div>
+                          <div className="text-xs text-gray-500 dark:text-gray-400">
+                            {user.email}
                           </div>
                         </div>
-                      </td>
-                      <td className="py-4 px-6 text-gray-700 dark:text-gray-300">
-                        {user.email}
-                      </td>
-                      <td className="py-4 px-6">
-                        {user.isPremium ? (
-                          <span className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300">
-                            Premium
-                          </span>
-                        ) : (
-                          <span className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300">
-                            Free
-                          </span>
-                        )}
-                      </td>
-                      <td className="py-4 px-6">
-                        {user.isBlocked ? (
-                          <span className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300">
-                            Blocked
-                          </span>
-                        ) : (
-                          <span className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300">
-                            Active
-                          </span>
-                        )}
-                      </td>
-                      <td className="py-4 px-6 text-gray-500 dark:text-gray-400">
-                        {user.createdAt &&
-                          format(new Date(user.createdAt), "MMM dd, yyyy")}
-                      </td>
-                      <td className="py-4 px-6">
-                        <button
-                          onClick={() =>
-                            handleBlock(user._id, user.isBlocked, user.name)
-                          }
-                          className={`${
-                            user.isBlocked
-                              ? "text-green-600 dark:text-green-400 hover:underline"
-                              : "text-red-600 dark:text-red-400 hover:underline"
-                          }`}
-                        >
-                          {user.isBlocked ? "Unblock" : "Block"}
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                      </div>
+                    </td>
+                    <td className="py-4 px-6">
+                      <select
+                        value={user.role}
+                        onChange={(e) =>
+                          handleRoleChange(user._id, user.role, e.target.value)
+                        }
+                        className="text-sm border-0 bg-transparent focus:ring-0 text-gray-900 dark:text-white font-medium cursor-pointer hover:text-primary dark:hover:text-primary transition-colors"
+                      >
+                        <option value="citizen" className="dark:bg-slate-800">
+                          Citizen
+                        </option>
+                        <option value="staff" className="dark:bg-slate-800">
+                          Staff
+                        </option>
+                        <option value="admin" className="dark:bg-slate-800">
+                          Admin
+                        </option>
+                      </select>
+                    </td>
+                    <td className="py-4 px-6">
+                      {user.isPremium ? (
+                        <span className="px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-black uppercase tracking-widest rounded">
+                          Premium
+                        </span>
+                      ) : (
+                        <span className="px-2 py-1 bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-gray-400 text-[10px] font-black uppercase tracking-widest rounded">
+                          Free
+                        </span>
+                      )}
+                    </td>
+                    <td className="py-4 px-6">
+                      <span
+                        className={`px-2 py-1 rounded text-[10px] font-black uppercase tracking-widest ${
+                          user.isBlocked
+                            ? "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400"
+                            : "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400"
+                        }`}
+                      >
+                        {user.isBlocked ? "Blocked" : "Active"}
+                      </span>
+                    </td>
+                    <td className="py-4 px-6 text-sm text-gray-500 dark:text-gray-400">
+                      {user.createdAt &&
+                        format(new Date(user.createdAt), "MMM dd, yyyy")}
+                    </td>
+                    <td className="py-4 px-6 text-right">
+                      <button
+                        onClick={() =>
+                          handleBlock(user._id, user.isBlocked, user.name)
+                        }
+                        className={`text-sm font-bold tracking-tight hover:underline ${
+                          user.isBlocked
+                            ? "text-green-600 dark:text-green-400"
+                            : "text-red-600 dark:text-red-400"
+                        }`}
+                      >
+                        {user.isBlocked ? "Unblock" : "Block User"}
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

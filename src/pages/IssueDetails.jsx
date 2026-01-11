@@ -29,6 +29,7 @@ import {
   MdClose,
 } from "react-icons/md";
 import BlockedWarning from "../components/BlockedWarning";
+import { DetailSkeleton } from "../components/Skeleton";
 
 const IssueDetails = () => {
   const { id } = useParams();
@@ -126,16 +127,7 @@ const IssueDetails = () => {
   };
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="flex flex-col items-center gap-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent"></div>
-          <p className="text-gray-500 dark:text-gray-400">
-            Loading issue details...
-          </p>
-        </div>
-      </div>
-    );
+    return <DetailSkeleton />;
   }
 
   const issue = issueData;
@@ -304,10 +296,11 @@ const IssueDetails = () => {
                     <div key={entry._id} className="flex gap-4 relative">
                       <div className="flex flex-col items-center">
                         <div
-                          className={`w-4 h-4 rounded-full border-2 border-white dark:border-slate-800 ${idx === 0
-                            ? "bg-primary ring-2 ring-primary/20"
-                            : "bg-gray-300 dark:bg-gray-600"
-                            }`}
+                          className={`w-4 h-4 rounded-full border-2 border-white dark:border-slate-800 ${
+                            idx === 0
+                              ? "bg-primary ring-2 ring-primary/20"
+                              : "bg-gray-300 dark:bg-gray-600"
+                          }`}
                         ></div>
                         {idx < timeline.length - 1 && (
                           <div className="w-0.5 h-full bg-gray-200 dark:bg-gray-700 mt-2 min-h-15"></div>
@@ -377,10 +370,11 @@ const IssueDetails = () => {
                     issue.status.slice(1).replace("-", " ")}
                 </span>
                 <span
-                  className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-semibold border ${issue.priority === "high"
-                    ? "bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 border-red-200 dark:border-red-800"
-                    : "bg-gray-50 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-700"
-                    }`}
+                  className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-semibold border ${
+                    issue.priority === "high"
+                      ? "bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 border-red-200 dark:border-red-800"
+                      : "bg-gray-50 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-700"
+                  }`}
                 >
                   {issue.priority === "high"
                     ? "High Priority"
@@ -398,16 +392,17 @@ const IssueDetails = () => {
                 <button
                   onClick={handleUpvote}
                   disabled={upvoteMutation.isPending || dbUser?.isBlocked}
-                  className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl transition-all font-semibold ${isOwner || dbUser?.isBlocked
-                    ? "bg-gray-100 dark:bg-slate-700 text-gray-400 dark:text-gray-500 cursor-not-allowed"
-                    : "bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300 hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/20 dark:hover:text-primary"
-                    }`}
+                  className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl transition-all font-semibold ${
+                    isOwner || dbUser?.isBlocked
+                      ? "bg-gray-100 dark:bg-slate-700 text-gray-400 dark:text-gray-500 cursor-not-allowed"
+                      : "bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300 hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/20 dark:hover:text-primary"
+                  }`}
                   title={
                     dbUser?.isBlocked
                       ? "Your account is blocked"
                       : isOwner
-                        ? "You cannot upvote your own issue"
-                        : ""
+                      ? "You cannot upvote your own issue"
+                      : ""
                   }
                 >
                   <MdThumbUp className="text-xl" />

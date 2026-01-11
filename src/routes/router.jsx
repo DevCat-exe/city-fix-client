@@ -6,8 +6,13 @@ import AllIssues from "../pages/AllIssues";
 import IssueDetails from "../pages/IssueDetails";
 import Login from "../pages/auth/Login";
 import Signup from "../pages/auth/Signup";
+import ForgotPassword from "../pages/auth/ForgotPassword";
 import AboutUs from "../pages/AboutUs";
 import ContactUs from "../pages/ContactUs";
+import Blog from "../pages/Blog";
+import BlogDetail from "../pages/BlogDetail";
+import FAQ from "../pages/FAQ";
+import Guides from "../pages/Guides";
 import NotFound from "../pages/NotFound";
 import ProtectedRoute from "../components/ProtectedRoute";
 // Dashboard Components
@@ -56,6 +61,22 @@ export const router = createBrowserRouter([
         path: "contact",
         Component: ContactUs,
       },
+      {
+        path: "blog",
+        Component: Blog,
+      },
+      {
+        path: "blog/:id",
+        Component: BlogDetail,
+      },
+      {
+        path: "faq",
+        Component: FAQ,
+      },
+      {
+        path: "guides",
+        Component: Guides,
+      },
     ],
   },
   {
@@ -69,6 +90,10 @@ export const router = createBrowserRouter([
       {
         path: "signup",
         Component: Signup,
+      },
+      {
+        path: "forgot-password",
+        Component: ForgotPassword,
       },
     ],
   },

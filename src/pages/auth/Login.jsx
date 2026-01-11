@@ -47,7 +47,7 @@ const Login = () => {
   }, [navigate, refreshUser]);
 
   const handleEmailLogin = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     setLoading(true);
     const loadingToast = toast.loading("Signing in...");
 
@@ -74,6 +74,29 @@ const Login = () => {
     }
   };
 
+  const handleDemoLogin = async (demoEmail, demoPassword) => {
+    setEmail(demoEmail);
+    setPassword(demoPassword);
+    setLoading(true);
+    const loadingToast = toast.loading(
+      `Signing in as ${demoEmail.split("@")[0]}...`
+    );
+
+    try {
+      await signInWithEmailAndPassword(auth, demoEmail, demoPassword);
+      await refreshUser();
+      toast.success("Logged in successfully!", { id: loadingToast });
+      navigate("/");
+    } catch (error) {
+      console.error("Demo login error:", error);
+      toast.error("Demo login failed. Please check credentials.", {
+        id: loadingToast,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleGoogleLogin = async () => {
     setLoading(true);
     try {
@@ -92,7 +115,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-white dark:from-slate-900 dark:to-slate-800">
       <Navbar />
       <div className="flex flex-col md:flex-row min-h-[calc(100vh-64px)]">
         <div className="relative hidden md:flex md:w-1/2 flex-col items-start justify-end p-12 bg-gradient-to-br from-primary via-blue-600 to-blue-700 text-white overflow-hidden">
@@ -176,12 +199,12 @@ const Login = () => {
                     <p className="text-gray-900 dark:text-white text-base font-medium leading-normal">
                       Password
                     </p>
-                    <a
+                    <Link
+                      to="/forgot-password"
                       className="text-primary text-sm font-medium hover:underline"
-                      href="#"
                     >
                       Forgot Password?
-                    </a>
+                    </Link>
                   </div>
                   <div className="relative flex w-full flex-1 items-stretch">
                     <input
@@ -220,14 +243,48 @@ const Login = () => {
                     </>
                   )}
                 </button>
-                <div className="relative">
+                <div className="relative py-2">
                   <div className="absolute inset-0 flex items-center">
                     <div className="w-full border-t border-gray-300 dark:border-slate-600"></div>
                   </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="px-4 bg-white dark:bg-slate-800 text-gray-500 dark:text-gray-400">
-                      Or continue with
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="px-2 bg-white dark:bg-slate-800 text-gray-500 dark:text-gray-400">
+                      Demo Access
                     </span>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-2 px-1">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleDemoLogin("admin@cityfix.com", "Admin123!")
+                    }
+                    className="px-2 py-2 rounded-lg text-[10px] font-bold bg-rose-50 text-rose-600 dark:bg-rose-900/20 dark:text-rose-400 border border-rose-100 dark:border-rose-800 hover:bg-rose-100 dark:hover:bg-rose-900/40 transition-colors uppercase tracking-wider"
+                  >
+                    Admin
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleDemoLogin("staff1@cityfix.com", "Staff123!")
+                    }
+                    className="px-2 py-2 rounded-lg text-[10px] font-bold bg-amber-50 text-amber-600 dark:bg-amber-900/20 dark:text-amber-400 border border-amber-100 dark:border-amber-800 hover:bg-amber-100 dark:hover:bg-amber-900/40 transition-colors uppercase tracking-wider"
+                  >
+                    Staff
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleDemoLogin("alex@email.com", "Citizen123!")
+                    }
+                    className="px-2 py-2 rounded-lg text-[10px] font-bold bg-teal-50 text-teal-600 dark:bg-teal-900/20 dark:text-teal-400 border border-teal-100 dark:border-teal-800 hover:bg-teal-100 dark:hover:bg-teal-900/40 transition-colors uppercase tracking-wider"
+                  >
+                    Citizen
+                  </button>
+                </div>
+                <div className="relative py-2 mt-2">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-gray-100 dark:border-slate-800"></div>
                   </div>
                 </div>
                 <button

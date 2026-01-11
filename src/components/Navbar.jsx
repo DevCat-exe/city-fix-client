@@ -1,5 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { useDarkMode } from "../hooks/useDarkMode";
 import { motion } from "motion/react";
 import { useState } from "react";
 import {
@@ -17,10 +18,14 @@ import {
   MdPeople,
   MdSettings,
   MdAttachMoney,
+  MdDarkMode,
+  MdLightMode,
+  MdQuestionAnswer,
 } from "react-icons/md";
 
 const Navbar = () => {
   const { dbUser, signOut } = useAuth();
+  const { isDark, toggleDarkMode } = useDarkMode();
   const location = useLocation();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -169,6 +174,36 @@ const Navbar = () => {
                 >
                   Home
                 </Link>
+
+                {/* Resources Dropdown */}
+                <div className="relative group">
+                  <button className="flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary hover:bg-gray-100 dark:hover:bg-slate-800">
+                    Resources
+                    <MdExpandMore className="text-gray-400 group-hover:rotate-180 transition-transform" />
+                  </button>
+                  <div className="absolute top-full left-0 mt-2 w-56 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-gray-200 dark:border-slate-700 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <Link
+                      to="/blog"
+                      className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                    >
+                      📰 Blog & News
+                    </Link>
+                    <Link
+                      to="/faq"
+                      className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                    >
+                      ❓ FAQ
+                    </Link>
+                    <Link
+                      to="/guides"
+                      className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                    >
+                      <MdArticle className="text-base text-gray-400" />
+                      Guides
+                    </Link>
+                  </div>
+                </div>
+
                 <Link
                   to="/all-issues"
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
@@ -179,6 +214,7 @@ const Navbar = () => {
                 >
                   All Issues
                 </Link>
+
                 <Link
                   to="/about"
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
@@ -189,6 +225,7 @@ const Navbar = () => {
                 >
                   About Us
                 </Link>
+
                 <Link
                   to="/contact"
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
@@ -203,6 +240,20 @@ const Navbar = () => {
             )}
           </nav>
           <div className="flex items-center gap-3">
+            {/* Dark Mode Toggle */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={toggleDarkMode}
+              className="hidden md:flex items-center justify-center p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+              title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {isDark ? (
+                <MdLightMode className="text-xl" />
+              ) : (
+                <MdDarkMode className="text-xl" />
+              )}
+            </motion.button>
             {dbUser ? (
               <div className="hidden md:block group relative">
                 <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors">
@@ -239,32 +290,119 @@ const Navbar = () => {
                     )}
                   </div>
                   {dbUser.role === "citizen" && (
-                    <Link
-                      to="/dashboard/citizen"
-                      className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
-                    >
-                      <MdDashboard className="text-base" />
-                      Dashboard
-                    </Link>
+                    <>
+                      <Link
+                        to="/dashboard/citizen"
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                      >
+                        <MdDashboard className="text-base" />
+                        Dashboard
+                      </Link>
+                      <Link
+                        to="/dashboard/citizen/report"
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                      >
+                        <MdAddCircle className="text-base" />
+                        Report Issue
+                      </Link>
+                      <Link
+                        to="/dashboard/citizen/my-issues"
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                      >
+                        <MdArticle className="text-base" />
+                        My Issues
+                      </Link>
+                      <Link
+                        to="/dashboard/citizen/profile"
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                      >
+                        <MdPerson className="text-base" />
+                        Profile
+                      </Link>
+                    </>
                   )}
                   {dbUser.role === "staff" && (
-                    <Link
-                      to="/dashboard/staff"
-                      className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
-                    >
-                      <MdDashboard className="text-base" />
-                      Dashboard
-                    </Link>
+                    <>
+                      <Link
+                        to="/dashboard/staff"
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                      >
+                        <MdDashboard className="text-base" />
+                        Dashboard
+                      </Link>
+                      <Link
+                        to="/dashboard/staff/assigned"
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                      >
+                        <MdArticle className="text-base" />
+                        Assigned Issues
+                      </Link>
+                      <Link
+                        to="/dashboard/staff/profile"
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                      >
+                        <MdPerson className="text-base" />
+                        Profile
+                      </Link>
+                    </>
                   )}
                   {dbUser.role === "admin" && (
+                    <>
+                      <Link
+                        to="/dashboard/admin"
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                      >
+                        <MdDashboard className="text-base" />
+                        Dashboard
+                      </Link>
+                      <Link
+                        to="/dashboard/admin/all-issues"
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                      >
+                        <MdArticle className="text-base" />
+                        All Issues
+                      </Link>
+                      <Link
+                        to="/dashboard/admin/users"
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                      >
+                        <MdPeople className="text-base" />
+                        Manage Users
+                      </Link>
+                      <Link
+                        to="/dashboard/admin/staff"
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                      >
+                        <MdSettings className="text-base" />
+                        Manage Staff
+                      </Link>
+                      <Link
+                        to="/dashboard/admin/payments"
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                      >
+                        <MdAttachMoney className="text-base" />
+                        Payments
+                      </Link>
+                    </>
+                  )}
+
+                  {/* Common user links */}
+                  <div className="border-t border-gray-200 dark:border-slate-700 mt-2 pt-2">
                     <Link
-                      to="/dashboard/admin"
+                      to="/settings"
                       className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
                     >
-                      <MdDashboard className="text-base" />
-                      Dashboard
+                      <MdSettings className="text-base" />
+                      Settings
                     </Link>
-                  )}
+                    <Link
+                      to="/help"
+                      className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                    >
+                      <MdQuestionAnswer className="text-base" />
+                      Help & Support
+                    </Link>
+                  </div>
                   <button
                     onClick={() => {
                       signOut();
@@ -344,6 +482,36 @@ const Navbar = () => {
                 >
                   Home
                 </Link>
+
+                {/* Mobile Resources Section */}
+                <div className="border-t border-gray-200 dark:border-slate-700 pt-2">
+                  <p className="px-4 py-2 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    Resources
+                  </p>
+                  <Link
+                    to="/blog"
+                    onClick={closeMobileMenu}
+                    className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+                  >
+                    📰 Blog & News
+                  </Link>
+                  <Link
+                    to="/faq"
+                    onClick={closeMobileMenu}
+                    className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+                  >
+                    ❓ FAQ
+                  </Link>
+                  <Link
+                    to="/guides"
+                    onClick={closeMobileMenu}
+                    className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+                  >
+                    <MdArticle className="text-base text-gray-400" />
+                    Guides
+                  </Link>
+                </div>
+
                 <Link
                   to="/all-issues"
                   onClick={closeMobileMenu}
@@ -355,6 +523,7 @@ const Navbar = () => {
                 >
                   All Issues
                 </Link>
+
                 <Link
                   to="/about"
                   onClick={closeMobileMenu}
@@ -366,6 +535,7 @@ const Navbar = () => {
                 >
                   About Us
                 </Link>
+
                 <Link
                   to="/contact"
                   onClick={closeMobileMenu}
@@ -380,6 +550,29 @@ const Navbar = () => {
               </>
             )}
 
+            {/* Dark Mode Toggle for Mobile */}
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => {
+                toggleDarkMode();
+                closeMobileMenu();
+              }}
+              className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+            >
+              {isDark ? (
+                <>
+                  <MdLightMode className="text-xl" />
+                  <span>Light Mode</span>
+                </>
+              ) : (
+                <>
+                  <MdDarkMode className="text-xl" />
+                  <span>Dark Mode</span>
+                </>
+              )}
+            </motion.button>
+
             {/* User actions for mobile */}
             <div className="border-t border-gray-200 dark:border-slate-700 pt-4">
               {dbUser ? (
@@ -393,35 +586,133 @@ const Navbar = () => {
                     </p>
                   </div>
                   {dbUser.role === "citizen" && (
-                    <Link
-                      to="/dashboard/citizen"
-                      onClick={closeMobileMenu}
-                      className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
-                    >
-                      <MdDashboard className="text-base" />
-                      Dashboard
-                    </Link>
+                    <>
+                      <Link
+                        to="/dashboard/citizen"
+                        onClick={closeMobileMenu}
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+                      >
+                        <MdDashboard className="text-base" />
+                        Dashboard
+                      </Link>
+                      <Link
+                        to="/dashboard/citizen/report"
+                        onClick={closeMobileMenu}
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+                      >
+                        <MdAddCircle className="text-base" />
+                        Report Issue
+                      </Link>
+                      <Link
+                        to="/dashboard/citizen/my-issues"
+                        onClick={closeMobileMenu}
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+                      >
+                        <MdArticle className="text-base" />
+                        My Issues
+                      </Link>
+                      <Link
+                        to="/dashboard/citizen/profile"
+                        onClick={closeMobileMenu}
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+                      >
+                        <MdPerson className="text-base" />
+                        Profile
+                      </Link>
+                    </>
                   )}
                   {dbUser.role === "staff" && (
-                    <Link
-                      to="/dashboard/staff"
-                      onClick={closeMobileMenu}
-                      className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
-                    >
-                      <MdDashboard className="text-base" />
-                      Dashboard
-                    </Link>
+                    <>
+                      <Link
+                        to="/dashboard/staff"
+                        onClick={closeMobileMenu}
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+                      >
+                        <MdDashboard className="text-base" />
+                        Dashboard
+                      </Link>
+                      <Link
+                        to="/dashboard/staff/assigned"
+                        onClick={closeMobileMenu}
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+                      >
+                        <MdArticle className="text-base" />
+                        Assigned Issues
+                      </Link>
+                      <Link
+                        to="/dashboard/staff/profile"
+                        onClick={closeMobileMenu}
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+                      >
+                        <MdPerson className="text-base" />
+                        Profile
+                      </Link>
+                    </>
                   )}
                   {dbUser.role === "admin" && (
+                    <>
+                      <Link
+                        to="/dashboard/admin"
+                        onClick={closeMobileMenu}
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+                      >
+                        <MdDashboard className="text-base" />
+                        Dashboard
+                      </Link>
+                      <Link
+                        to="/dashboard/admin/all-issues"
+                        onClick={closeMobileMenu}
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+                      >
+                        <MdArticle className="text-base" />
+                        All Issues
+                      </Link>
+                      <Link
+                        to="/dashboard/admin/users"
+                        onClick={closeMobileMenu}
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+                      >
+                        <MdPeople className="text-base" />
+                        Manage Users
+                      </Link>
+                      <Link
+                        to="/dashboard/admin/staff"
+                        onClick={closeMobileMenu}
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+                      >
+                        <MdSettings className="text-base" />
+                        Manage Staff
+                      </Link>
+                      <Link
+                        to="/dashboard/admin/payments"
+                        onClick={closeMobileMenu}
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+                      >
+                        <MdAttachMoney className="text-base" />
+                        Payments
+                      </Link>
+                    </>
+                  )}
+
+                  {/* Common user links for mobile */}
+                  <div className="border-t border-gray-200 dark:border-slate-700 pt-2">
                     <Link
-                      to="/dashboard/admin"
+                      to="/settings"
                       onClick={closeMobileMenu}
                       className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
                     >
-                      <MdDashboard className="text-base" />
-                      Dashboard
+                      <MdSettings className="text-base" />
+                      Settings
                     </Link>
-                  )}
+                    <Link
+                      to="/help"
+                      onClick={closeMobileMenu}
+                      className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+                    >
+                      <MdQuestionAnswer className="text-base" />
+                      Help & Support
+                    </Link>
+                  </div>
                   <button
                     onClick={() => {
                       signOut();

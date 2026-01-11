@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { getAllIssues } from "../api/endpoints";
 
 import IssueCard from "../components/IssueCard";
+import { SkeletonLoader } from "../components/Skeleton";
 import {
   MdSearch,
   MdChevronLeft,
@@ -17,9 +18,10 @@ const AllIssues = () => {
   const [category, setCategory] = useState("");
   const [status, setStatus] = useState("");
   const [priority, setPriority] = useState("");
+  const [sort, setSort] = useState("newest");
 
   const { data, isLoading } = useQuery({
-    queryKey: ["issues", page, search, category, status, priority],
+    queryKey: ["issues", page, search, category, status, priority, sort],
     queryFn: () =>
       getAllIssues({
         page,
@@ -28,7 +30,7 @@ const AllIssues = () => {
         category: category || undefined,
         status: status || undefined,
         priority: priority || undefined,
-        sort: "upvotes",
+        sort: sort,
       }),
     select: (data) =>
       data.data?.data || {
@@ -66,12 +68,12 @@ const AllIssues = () => {
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           className="mb-8 p-6 bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 shadow-sm"
         >
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col xl:flex-row gap-4">
             <div className="flex-1 relative">
               <MdSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
               <input
                 type="text"
-                placeholder="Search issues by title, description, or location..."
+                placeholder="Search issues..."
                 value={search}
                 onChange={(e) => {
                   setSearch(e.target.value);
@@ -80,63 +82,70 @@ const AllIssues = () => {
                 className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
               />
             </div>
-            <select
-              value={category}
-              onChange={(e) => {
-                setCategory(e.target.value);
-                setPage(1);
-              }}
-              className="px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
-            >
-              <option value="">All Categories</option>
-              <option value="Roads">Roads</option>
-              <option value="Utilities">Utilities</option>
-              <option value="Parks">Parks</option>
-              <option value="Garbage">Garbage</option>
-              <option value="Sidewalks">Sidewalks</option>
-              <option value="Public Spaces">Public Spaces</option>
-            </select>
-            <select
-              value={status}
-              onChange={(e) => {
-                setStatus(e.target.value);
-                setPage(1);
-              }}
-              className="px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
-            >
-              <option value="">All Status</option>
-              <option value="pending">Pending</option>
-              <option value="in-progress">In Progress</option>
-              <option value="working">Working</option>
-              <option value="resolved">Resolved</option>
-              <option value="closed">Closed</option>
-              <option value="rejected">Rejected</option>
-            </select>
-            <select
-              value={priority}
-              onChange={(e) => {
-                setPriority(e.target.value);
-                setPage(1);
-              }}
-              className="px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
-            >
-              <option value="">All Priority</option>
-              <option value="high">High</option>
-              <option value="normal">Normal</option>
-            </select>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <select
+                value={category}
+                onChange={(e) => {
+                  setCategory(e.target.value);
+                  setPage(1);
+                }}
+                className="px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+              >
+                <option value="">All Categories</option>
+                <option value="Roads">Roads</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Parks">Parks</option>
+                <option value="Garbage">Garbage</option>
+                <option value="Sidewalks">Sidewalks</option>
+                <option value="Public Spaces">Public Spaces</option>
+              </select>
+              <select
+                value={status}
+                onChange={(e) => {
+                  setStatus(e.target.value);
+                  setPage(1);
+                }}
+                className="px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+              >
+                <option value="">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="in-progress">In Progress</option>
+                <option value="working">Working</option>
+                <option value="resolved">Resolved</option>
+                <option value="closed">Closed</option>
+                <option value="rejected">Rejected</option>
+              </select>
+              <select
+                value={priority}
+                onChange={(e) => {
+                  setPriority(e.target.value);
+                  setPage(1);
+                }}
+                className="px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+              >
+                <option value="">All Priority</option>
+                <option value="high">High</option>
+                <option value="normal">Normal</option>
+              </select>
+              <select
+                value={sort}
+                onChange={(e) => {
+                  setSort(e.target.value);
+                  setPage(1);
+                }}
+                className="px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all font-semibold text-primary dark:text-primary"
+              >
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+                <option value="upvotes">Most Upvoted</option>
+              </select>
+            </div>
           </div>
         </motion.div>
 
         {/* Issues Grid */}
         {isLoading ? (
-          <div className="flex items-center justify-center py-20">
-            <div className="flex flex-col items-center gap-4">
-              <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent"></div>
-              <p className="text-gray-500 dark:text-gray-400">
-                Loading issues...
-              </p>
-            </div>
-          </div>
+          <SkeletonLoader count={12} />
         ) : data.issues && data.issues.length > 0 ? (
           <>
             <motion.div
@@ -152,7 +161,7 @@ const AllIssues = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
                     duration: 0.5,
-                    delay: 0.5 + index * 0.1,
+                    delay: index * 0.05,
                     ease: "easeOut",
                   }}
                 >
@@ -190,10 +199,11 @@ const AllIssues = () => {
                         <button
                           key={pageNum}
                           onClick={() => setPage(pageNum)}
-                          className={`w-10 h-10 rounded-lg font-semibold transition-all ${page === pageNum
-                            ? "bg-primary text-white shadow-lg shadow-primary/30"
-                            : "bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-slate-700"
-                            }`}
+                          className={`w-10 h-10 rounded-lg font-semibold transition-all ${
+                            page === pageNum
+                              ? "bg-primary text-white shadow-lg shadow-primary/30"
+                              : "bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-slate-700"
+                          }`}
                         >
                           {pageNum}
                         </button>
@@ -231,6 +241,7 @@ const AllIssues = () => {
                 setCategory("");
                 setStatus("");
                 setPriority("");
+                setSort("newest");
                 setPage(1);
               }}
               className="px-6 py-3 rounded-xl bg-primary text-white font-semibold hover:bg-primary/90 transition-colors"

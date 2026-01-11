@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllIssues } from "../api/endpoints";
 import { useAuth } from "../hooks/useAuth";
 import IssueCard from "../components/IssueCard";
+import { SkeletonLoader } from "../components/Skeleton";
 import { motion, AnimatePresence } from "motion/react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -19,6 +20,14 @@ import {
   MdVisibility,
   MdRocketLaunch,
   MdPersonAdd,
+  MdTrendingUp,
+  MdPeople,
+  MdStar,
+  MdEmail,
+  MdHandshake,
+  MdQuestionAnswer,
+  MdNewspaper,
+  MdExpandMore,
 } from "react-icons/md";
 
 const Home = () => {
@@ -56,7 +65,7 @@ const Home = () => {
     },
   ];
 
-  const { data: resolvedIssues } = useQuery({
+  const { data: resolvedIssues, isLoading: isLoadingResolved } = useQuery({
     queryKey: ["issues", "resolved"],
     queryFn: () =>
       getAllIssues({ status: "resolved", limit: 6, sort: "newest" }),
@@ -128,10 +137,10 @@ const Home = () => {
             }
           `}</style>
           <div className="relative max-w-7xl mx-auto py-10 sm:py-20 px-4 sm:px-6 lg:px-8">
-            <div className="relative h-125 sm:h-150 w-full overflow-hidden rounded-3xl shadow-2xl">
+            <div className="relative h-[500px] sm:h-[600px] w-full overflow-hidden rounded-3xl shadow-2xl">
               <Slider {...settings} className="h-full">
                 {slides.map((slide, index) => (
-                  <div key={index} className="relative h-125 sm:h-150">
+                  <div key={index} className="relative h-[500px] sm:h-[600px]">
                     {/* Background Image */}
                     <div
                       className="absolute inset-0 bg-cover bg-center transition-transform duration-5000 scale-110"
@@ -208,7 +217,7 @@ const Home = () => {
 
         {/* Latest Resolved Issues */}
         <section
-          className="w-full py-20 sm:py-28 bg-white dark:bg-slate-900"
+          className="w-full py-20 sm:py-28 bg-linear-to-b from-white via-gray-50 to-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"
           data-aos="fade-up"
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -225,8 +234,10 @@ const Home = () => {
                 time
               </p>
             </div>
-            {resolvedIssues && resolvedIssues.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {isLoadingResolved ? (
+              <SkeletonLoader count={6} className="lg:gap-8" />
+            ) : resolvedIssues && resolvedIssues.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
                 {resolvedIssues.map((issue) => (
                   <IssueCard key={issue._id} issue={issue} />
                 ))}
@@ -245,7 +256,7 @@ const Home = () => {
         </section>
 
         {/* Features Section */}
-        <section className="w-full py-20 sm:py-28 bg-linear-to-b from-gray-50 to-white dark:from-slate-800 dark:to-slate-900">
+        <section className="w-full py-20 sm:py-28 bg-linear-to-b from-white via-gray-50 to-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">
@@ -358,7 +369,7 @@ const Home = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="w-full py-20 sm:py-28">
+        <section className="w-full py-20 sm:py-28 bg-linear-to-b from-white via-gray-50 to-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="relative overflow-hidden bg-linear-to-br from-primary via-blue-600 to-blue-700 text-white rounded-3xl p-12 sm:p-16 text-center shadow-2xl">
               <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyIi8+PC9nPjwvZz48L3N2Zz4=')] opacity-20"></div>
@@ -391,6 +402,461 @@ const Home = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Statistics Section */}
+        <section
+          className="w-full py-20 sm:py-28 bg-linear-to-b from-white via-gray-50 to-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"
+          data-aos="fade-up"
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">
+                Impact in Numbers
+              </h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                See how we're making a difference in communities everywhere
+              </p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="text-center">
+                <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-linear-to-br from-primary/20 to-blue-100 dark:from-primary/20 dark:to-blue-900/30 text-primary mb-4 mx-auto">
+                  <MdTrendingUp className="text-3xl" />
+                </div>
+                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                  15,234
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Issues Resolved
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-linear-to-br from-green-500/20 to-green-100 dark:from-green-500/20 dark:to-green-900/30 text-green-600 dark:text-green-400 mb-4 mx-auto">
+                  <MdPeople className="text-3xl" />
+                </div>
+                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                  8,456
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Active Citizens
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-linear-to-br from-yellow-500/20 to-yellow-100 dark:from-yellow-500/20 dark:to-yellow-900/30 text-yellow-600 dark:text-yellow-400 mb-4 mx-auto">
+                  <MdStar className="text-3xl" />
+                </div>
+                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                  4.8
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">User Rating</p>
+              </div>
+              <div className="text-center">
+                <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-linear-to-br from-purple-500/20 to-purple-100 dark:from-purple-500/20 dark:to-purple-900/30 text-purple-600 dark:text-purple-400 mb-4 mx-auto">
+                  <MdCheckCircle className="text-3xl" />
+                </div>
+                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                  92%
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">Success Rate</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials Section */}
+        <section
+          className="w-full py-20 sm:py-28 bg-linear-to-b from-white via-gray-50 to-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"
+          data-aos="fade-up"
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">
+                What Our Users Say
+              </h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Real stories from real citizens making a difference
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="p-8 rounded-2xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-lg">
+                <div className="flex items-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <MdStar key={i} className="text-yellow-400 text-xl" />
+                  ))}
+                </div>
+                <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                  "CityFix helped me report a broken streetlight in my
+                  neighborhood. It was fixed within 48 hours! This platform
+                  truly makes a difference."
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-linear-to-r from-primary to-blue-600 flex items-center justify-center text-white font-semibold">
+                    JD
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white">
+                      Jane Doe
+                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Concerned Citizen
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-8 rounded-2xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-lg">
+                <div className="flex items-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <MdStar key={i} className="text-yellow-400 text-xl" />
+                  ))}
+                </div>
+                <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                  "As a city council member, I appreciate how CityFix
+                  streamlines the reporting process and helps us prioritize
+                  issues effectively."
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-linear-to-r from-green-500 to-green-600 flex items-center justify-center text-white font-semibold">
+                    MS
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white">
+                      Mark Smith
+                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      City Council
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-8 rounded-2xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-lg">
+                <div className="flex items-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <MdStar key={i} className="text-yellow-400 text-xl" />
+                  ))}
+                </div>
+                <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                  "The transparency and real-time updates keep me informed about
+                  the issues I care about. Great work by the CityFix team!"
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-linear-to-r from-purple-500 to-purple-600 flex items-center justify-center text-white font-semibold">
+                    SJ
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white">
+                      Sarah Johnson
+                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Community Leader
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Newsletter Section */}
+        <section
+          className="w-full py-20 sm:py-28 bg-white dark:bg-slate-900"
+          data-aos="fade-up"
+        >
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary text-sm font-semibold mb-4">
+                <MdEmail className="text-base" />
+                <span>Stay Updated</span>
+              </div>
+              <h2 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">
+                Get the Latest Updates
+              </h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Subscribe to our newsletter and stay informed about new features
+                and success stories
+              </p>
+            </div>
+            <form
+              className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                className="flex-1 px-6 py-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+                required
+              />
+              <button
+                type="submit"
+                className="px-8 py-4 rounded-xl bg-linear-to-r from-primary to-blue-600 text-white font-semibold hover:from-primary/90 hover:to-blue-600/90 transition-all shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </section>
+
+        {/* Partners Section */}
+        <section
+          className="w-full py-20 sm:py-28 bg-linear-to-b from-white via-gray-50 to-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"
+          data-aos="fade-up"
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 text-sm font-semibold mb-4">
+                <MdHandshake className="text-base" />
+                <span>Trusted Partners</span>
+              </div>
+              <h2 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">
+                Working Together for Better Communities
+              </h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                We collaborate with leading organizations to maximize our impact
+              </p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
+              <div className="flex items-center justify-center p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:shadow-lg transition-shadow">
+                <div className="text-2xl font-bold text-gray-400">CityGov</div>
+              </div>
+              <div className="flex items-center justify-center p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:shadow-lg transition-shadow">
+                <div className="text-2xl font-bold text-gray-400">EcoWatch</div>
+              </div>
+              <div className="flex items-center justify-center p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:shadow-lg transition-shadow">
+                <div className="text-2xl font-bold text-gray-400">
+                  SafeStreets
+                </div>
+              </div>
+              <div className="flex items-center justify-center p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:shadow-lg transition-shadow">
+                <div className="text-2xl font-bold text-gray-400">
+                  GreenCity
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Recent Blog Posts Section */}
+        <section
+          className="w-full py-20 sm:py-28 bg-linear-to-b from-white via-gray-50 to-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"
+          data-aos="fade-up"
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 text-sm font-semibold mb-4">
+                <MdNewspaper className="text-base" />
+                <span>Latest News</span>
+              </div>
+              <h2 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">
+                From Our Blog
+              </h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Tips, stories, and insights about community improvement
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <article className="group rounded-2xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 overflow-hidden hover:shadow-xl transition-shadow">
+                <div className="h-48 bg-linear-to-r from-primary to-blue-600 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20"></div>
+                  <div className="absolute bottom-4 left-4">
+                    <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs font-semibold">
+                      Infrastructure
+                    </span>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary transition-colors">
+                    5 Ways to Improve Street Safety in Your Neighborhood
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                    Discover practical steps you can take to make your streets
+                    safer for everyone.
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      3 days ago
+                    </span>
+                    <Link
+                      to="/blog"
+                      className="text-primary font-semibold text-sm hover:underline"
+                    >
+                      Read More →
+                    </Link>
+                  </div>
+                </div>
+              </article>
+              <article className="group rounded-2xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 overflow-hidden hover:shadow-xl transition-shadow">
+                <div className="h-48 bg-linear-to-r from-green-500 to-green-600 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20"></div>
+                  <div className="absolute bottom-4 left-4">
+                    <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs font-semibold">
+                      Success Story
+                    </span>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary transition-colors">
+                    How Riverside Park Got Its Makeover
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                    Follow the journey of how community reports transformed a
+                    neglected park into a vibrant space.
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      1 week ago
+                    </span>
+                    <Link
+                      to="/blog"
+                      className="text-primary font-semibold text-sm hover:underline"
+                    >
+                      Read More →
+                    </Link>
+                  </div>
+                </div>
+              </article>
+              <article className="group rounded-2xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 overflow-hidden hover:shadow-xl transition-shadow">
+                <div className="h-48 bg-linear-to-r from-purple-500 to-purple-600 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20"></div>
+                  <div className="absolute bottom-4 left-4">
+                    <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs font-semibold">
+                      Guide
+                    </span>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary transition-colors">
+                    The Complete Guide to Reporting Infrastructure Issues
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                    Learn how to write effective reports that get attention and
+                    lead to quick resolutions.
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      2 weeks ago
+                    </span>
+                    <Link
+                      to="/blog"
+                      className="text-primary font-semibold text-sm hover:underline"
+                    >
+                      Read More →
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            </div>
+            <div className="text-center mt-12">
+              <Link
+                to="/blog"
+                className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-linear-to-r from-primary to-blue-600 text-white font-semibold hover:from-primary/90 hover:to-blue-600/90 transition-all shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40"
+              >
+                <MdNewspaper className="text-xl" />
+                View All Posts
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Preview Section */}
+        <section
+          className="w-full py-20 sm:py-28 bg-linear-to-b from-white via-gray-50 to-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"
+          data-aos="fade-up"
+        >
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300 text-sm font-semibold mb-4">
+                <MdQuestionAnswer className="text-base" />
+                <span>Quick Answers</span>
+              </div>
+              <h2 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Get answers to common questions about CityFix
+              </p>
+            </div>
+            <div className="space-y-4">
+              <details className="group rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 hover:shadow-lg transition-shadow">
+                <summary className="flex items-center justify-between cursor-pointer font-semibold text-gray-900 dark:text-white">
+                  How do I report an issue?
+                  <MdExpandMore className="text-gray-400 group-open:rotate-180 transition-transform" />
+                </summary>
+                <p className="mt-4 text-gray-600 dark:text-gray-400 leading-relaxed">
+                  Simply click on the "Report Issue" button, upload a photo,
+                  provide a description, and submit. Our team will review and
+                  assign it to the appropriate department.
+                </p>
+              </details>
+              <details className="group rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 hover:shadow-lg transition-shadow">
+                <summary className="flex items-center justify-between cursor-pointer font-semibold text-gray-900 dark:text-white">
+                  How long does it take to resolve issues?
+                  <MdExpandMore className="text-gray-400 group-open:rotate-180 transition-transform" />
+                </summary>
+                <p className="mt-4 text-gray-600 dark:text-gray-400 leading-relaxed">
+                  Resolution times vary depending on the issue type and
+                  priority. Most issues are resolved within 2-7 days, while
+                  urgent matters are addressed within 24 hours.
+                </p>
+              </details>
+              <details className="group rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 hover:shadow-lg transition-shadow">
+                <summary className="flex items-center justify-between cursor-pointer font-semibold text-gray-900 dark:text-white">
+                  Is CityFix free to use?
+                  <MdExpandMore className="text-gray-400 group-open:rotate-180 transition-transform" />
+                </summary>
+                <p className="mt-4 text-gray-600 dark:text-gray-400 leading-relaxed">
+                  Yes, CityFix is completely free for citizens. Premium features
+                  are available for organizations that need advanced analytics
+                  and reporting tools.
+                </p>
+              </details>
+            </div>
+            <div className="text-center mt-12">
+              <Link
+                to="/faq"
+                className="inline-flex items-center gap-2 px-8 py-3 rounded-xl border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-all"
+              >
+                <MdQuestionAnswer className="text-xl" />
+                View All FAQs
+              </Link>
+            </div>
+          </div>
+        </section>
+        {/* Newsletter Section - Moved to Bottom and Reduced Height */}
+        <section
+          className="w-full py-12 sm:py-16 bg-linear-to-b from-white via-gray-50 to-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"
+          data-aos="fade-up"
+        >
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
+                <MdEmail className="text-base" />
+                <span>Stay Updated</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">
+                Get the Latest Updates
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Subscribe to our newsletter and stay informed about our progress
+                and new features
+              </p>
+            </div>
+            <form
+              className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                className="flex-1 px-6 py-4 rounded-xl border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all shadow-sm"
+                required
+              />
+              <button
+                type="submit"
+                className="px-8 py-4 rounded-xl bg-linear-to-r from-primary to-blue-600 text-white font-semibold hover:from-primary/90 hover:to-blue-600/90 transition-all shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40"
+              >
+                Subscribe
+              </button>
+            </form>
           </div>
         </section>
       </main>

@@ -8,6 +8,7 @@ import "aos/dist/aos.css";
 import "./index.css";
 import { router } from "./routes/router.jsx";
 import { AuthProvider } from "./hooks/useAuth";
+import { DarkModeProvider } from "./contexts/DarkModeProvider";
 
 // Initialize AOS
 AOS.init({
@@ -29,10 +30,12 @@ const queryClient = new QueryClient({
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <RouterProvider router={router} />
-        <Toaster position="top-right" />
-      </AuthProvider>
+      <DarkModeProvider>
+        <AuthProvider>
+          <RouterProvider router={router} />
+          <Toaster position="top-right" />
+        </AuthProvider>
+      </DarkModeProvider>
     </QueryClientProvider>
   </StrictMode>
 );
