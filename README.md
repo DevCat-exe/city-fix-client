@@ -14,7 +14,7 @@ CityFix is a modern, responsive web platform that enables citizens to report and
 
 ## 🔗 Live Links
 
-- 🌐 **Live Site:** https://devcat-b12a11.netlify.app  
+- 🌐 **Live Site:** https://devcat-b12a11.vercel.app  
 - ⚙️ **Backend API:** https://city-fix-server.onrender.com  
 
 ---
