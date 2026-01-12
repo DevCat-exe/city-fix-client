@@ -132,30 +132,30 @@ const ReportIssue = () => {
         transition={{ duration: 0.5 }}
       >
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-base-content">
             Issue Limit Reached
           </h1>
-          <p className="text-gray-600 dark:text-gray-300 mt-1">
+          <p className="text-base-content/60 mt-1">
             You've reported {myIssuesCount}/3 issues on the Free Plan
           </p>
         </div>
 
         <div className="max-w-md mx-auto">
-          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-8 text-center border border-gray-200 dark:border-slate-700">
+          <div className="bg-base-100 rounded-lg shadow-md p-8 text-center border border-base-200">
             <div className="mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-bold text-base-content mb-4">
                 Upgrade to Premium
               </h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
+              <p className="text-base-content/60 mb-6">
                 Get unlimited issue reporting and priority support for just
                 ৳1000 (one-time payment)
               </p>
 
               <div className="grid grid-cols-1 gap-3 mb-8">
                 <div className="flex items-center gap-3 text-left">
-                  <div className="w-5 h-5 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                  <div className="w-5 h-5 rounded-full bg-success/10 flex items-center justify-center">
                     <svg
-                      className="w-3 h-3 text-green-600 dark:text-green-400"
+                      className="w-3 h-3 text-success"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -168,14 +168,14 @@ const ReportIssue = () => {
                       />
                     </svg>
                   </div>
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
+                  <span className="text-sm text-base-content/80">
                     Unlimited issues
                   </span>
                 </div>
                 <div className="flex items-center gap-3 text-left">
-                  <div className="w-5 h-5 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                  <div className="w-5 h-5 rounded-full bg-success/10 flex items-center justify-center">
                     <svg
-                      className="w-3 h-3 text-green-600 dark:text-green-400"
+                      className="w-3 h-3 text-success"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -188,15 +188,15 @@ const ReportIssue = () => {
                       />
                     </svg>
                   </div>
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
+                  <span className="text-sm text-base-content/80">
                     Priority support
                   </span>
                 </div>
               </div>
 
               <div className="mb-6">
-                <p className="text-3xl font-bold text-[#137fec] mb-2">৳1000</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-3xl font-bold text-primary mb-2">৳1000</p>
+                <p className="text-sm text-base-content/40">
                   One-time payment • Lifetime access
                 </p>
               </div>
@@ -204,7 +204,7 @@ const ReportIssue = () => {
 
             <Link
               to="/dashboard/citizen/profile"
-              className="w-full px-6 py-3 bg-[#137fec] text-white rounded-lg hover:bg-blue-600 font-medium transition-colors inline-block text-center"
+              className="w-full px-6 py-3 bg-primary text-primary-content rounded-lg hover:bg-primary/90 font-medium transition-colors inline-block text-center shadow-lg shadow-primary/20"
             >
               Upgrade to Premium
             </Link>
@@ -221,14 +221,14 @@ const ReportIssue = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+        <h1 className="text-3xl font-bold text-base-content">
           Report New Issue
         </h1>
-        <p className="text-gray-600 dark:text-gray-300 mt-1">
+        <p className="text-base-content/60 mt-1">
           Help improve your community by reporting infrastructure issues
         </p>
         {!dbUser?.isPremium && (
-          <p className="text-sm text-amber-600 mt-2">
+          <p className="text-sm text-warning mt-2 font-medium">
             You have reported {myIssuesCount}/3 issues (Free Plan)
           </p>
         )}
@@ -237,46 +237,46 @@ const ReportIssue = () => {
       {dbUser?.isBlocked && <BlockedWarning />}
 
       <div
-        className={`bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm ${
+        className={`bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm ${
           dbUser?.isBlocked ? "opacity-60 grayscale-[0.5]" : ""
         }`}
       >
         <form id="report-form" onSubmit={handleSubmit} className="space-y-6">
           <fieldset disabled={dbUser?.isBlocked} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Title <span className="text-red-500">*</span>
+              <label className="block text-sm font-medium text-base-content/80 mb-1">
+                Title <span className="text-error">*</span>
               </label>
               <input
                 type="text"
                 name="title"
                 required
                 placeholder="Brief description of the issue"
-                className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                className="w-full px-4 py-2 border border-base-300 rounded-lg focus:ring-2 focus:ring-primary bg-base-100 text-base-content placeholder:text-base-content/40"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Description <span className="text-red-500">*</span>
+              <label className="block text-sm font-medium text-base-content/80 mb-1">
+                Description <span className="text-error">*</span>
               </label>
               <textarea
                 name="description"
                 required
                 rows={5}
                 placeholder="Detailed description of the issue"
-                className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                className="w-full px-4 py-2 border border-base-300 rounded-lg focus:ring-2 focus:ring-primary bg-base-100 text-base-content placeholder:text-base-content/40"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Category <span className="text-red-500">*</span>
+              <label className="block text-sm font-medium text-base-content/80 mb-1">
+                Category <span className="text-error">*</span>
               </label>
               <select
                 name="category"
                 required
-                className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                className="w-full px-4 py-2 border border-base-300 rounded-lg focus:ring-2 focus:ring-primary bg-base-100 text-base-content"
               >
                 <option value="">Select a category</option>
                 <option value="Road">Road</option>
@@ -290,23 +290,23 @@ const ReportIssue = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Location (Address) <span className="text-red-500">*</span>
+              <label className="block text-sm font-medium text-base-content/80 mb-1">
+                Location (Address) <span className="text-error">*</span>
               </label>
               <input
                 type="text"
                 name="address"
                 required
                 placeholder="Street address or landmark"
-                className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                className="w-full px-4 py-2 border border-base-300 rounded-lg focus:ring-2 focus:ring-primary bg-base-100 text-base-content placeholder:text-base-content/40"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-base-content/80 mb-2">
                 Images (Max 5)
               </label>
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+              <div className="border-2 border-dashed border-base-300 rounded-lg p-6 text-center bg-base-200/50">
                 <input
                   type="file"
                   accept="image/*"
@@ -317,12 +317,12 @@ const ReportIssue = () => {
                 />
                 <label
                   htmlFor="image-upload"
-                  className="cursor-pointer inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200"
+                  className="cursor-pointer inline-flex items-center px-4 py-2 bg-base-300 text-base-content rounded-lg hover:bg-base-200 transition-colors"
                 >
                   <FiUpload className="mr-2" />
                   Choose Images
                 </label>
-                <p className="text-sm text-gray-500 mt-2">
+                <p className="text-sm text-base-content/40 mt-2">
                   PNG, JPG, GIF up to 10MB each
                 </p>
               </div>
@@ -334,12 +334,12 @@ const ReportIssue = () => {
                       <img
                         src={preview}
                         alt={`Preview ${index + 1}`}
-                        className="w-full h-24 object-cover rounded-lg"
+                        className="w-full h-24 object-cover rounded-lg border border-base-300"
                       />
                       <button
                         type="button"
                         onClick={() => removeImage(index)}
-                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
+                        className="absolute -top-2 -right-2 bg-error text-error-content rounded-full p-1 hover:bg-error/90"
                       >
                         <FiX size={16} />
                       </button>
@@ -355,7 +355,7 @@ const ReportIssue = () => {
               disabled={
                 createIssueMutation.isPending || uploading || dbUser?.isBlocked
               }
-              className="flex-1 px-6 py-3 bg-[#137fec] text-white rounded-lg hover:bg-blue-600 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 px-6 py-3 bg-primary text-primary-content rounded-lg hover:bg-primary/90 font-bold transition-all shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {dbUser?.isBlocked
                 ? "Account Restricted"
@@ -365,7 +365,7 @@ const ReportIssue = () => {
             </button>
             <Link
               to="/dashboard/citizen/my-issues"
-              className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 font-medium"
+              className="px-6 py-3 bg-base-300 text-base-content rounded-lg hover:bg-base-200 transition-colors font-medium"
             >
               Cancel
             </Link>

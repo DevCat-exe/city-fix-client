@@ -95,12 +95,12 @@ const IssueDetails = () => {
       confirmButtonColor: "#ef4444",
       cancelButtonColor: "#6b7280",
       confirmButtonText: "Yes, delete it!",
-      background: document.documentElement.classList.contains("dark")
-        ? "#1e293b"
+      background: document.documentElement.getAttribute("data-theme") === "dark"
+        ? "#0f172a"
         : "#fff",
-      color: document.documentElement.classList.contains("dark")
-        ? "#f1f5f9"
-        : "#111827",
+      color: document.documentElement.getAttribute("data-theme") === "dark"
+        ? "#f8fafc"
+        : "#0f172a",
     }).then((result) => {
       if (result.isConfirmed) {
         deleteMutation.mutate();
@@ -111,18 +111,18 @@ const IssueDetails = () => {
   const getStatusColor = (status) => {
     switch (status) {
       case "pending":
-        return "bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300";
+        return "bg-warning/10 text-warning border-warning/20";
       case "in-progress":
       case "working":
-        return "bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300";
+        return "bg-info/10 text-info border-info/20";
       case "resolved":
-        return "bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300";
+        return "bg-success/10 text-success border-success/20";
       case "closed":
-        return "bg-gray-100 dark:bg-gray-900/50 text-gray-700 dark:text-gray-300";
+        return "bg-base-200 text-base-content/60 border-base-300";
       case "rejected":
-        return "bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300";
+        return "bg-error/10 text-error border-error/20";
       default:
-        return "bg-gray-100 dark:bg-gray-900/50 text-gray-700 dark:text-gray-300";
+        return "bg-base-200 text-base-content/60 border-base-300";
     }
   };
 
@@ -137,13 +137,13 @@ const IssueDetails = () => {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-slate-800 mb-4">
-            <MdError className="text-3xl text-gray-400" />
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-base-200 mb-4">
+            <MdError className="text-3xl text-base-content/20" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+          <h2 className="text-2xl font-bold text-base-content mb-2">
             Issue not found
           </h2>
-          <p className="text-gray-500 dark:text-gray-400 mb-6">
+          <p className="text-base-content/60 mb-6">
             The issue you're looking for doesn't exist or has been removed.
           </p>
           <Link
@@ -160,7 +160,6 @@ const IssueDetails = () => {
   /* Logic Fix: Handle different response structures for submitter */
   const submitter = issue.submitterId || issue.submitter;
   const isOwner = dbUser && submitter?._id === dbUser._id;
-  /* canEdit/canDelete rely on issue.submitterId which is standard for single issue fetch */
   const canEdit =
     dbUser &&
     issue.submitterId?._id === dbUser._id &&
@@ -183,7 +182,7 @@ const IssueDetails = () => {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-gradient-page">
       <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {dbUser?.isBlocked && <BlockedWarning />}
         {/* Image Overlay Modal */}
@@ -219,19 +218,19 @@ const IssueDetails = () => {
         >
           <Link
             to="/"
-            className="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors"
+            className="text-base-content/60 hover:text-primary transition-colors"
           >
             Home
           </Link>
-          <span className="text-gray-400">/</span>
+          <span className="text-base-content/20">/</span>
           <Link
             to="/all-issues"
-            className="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors"
+            className="text-base-content/60 hover:text-primary transition-colors"
           >
             Issues
           </Link>
-          <span className="text-gray-400">/</span>
-          <span className="text-gray-900 dark:text-white font-medium">
+          <span className="text-base-content/20">/</span>
+          <span className="text-base-content font-medium">
             Issue #{issue._id.slice(-6)}
           </span>
         </motion.nav>
@@ -245,8 +244,8 @@ const IssueDetails = () => {
           >
             {/* Images */}
             {issue.images && issue.images.length > 0 && (
-              <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <div className="bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm">
+                <h3 className="text-lg font-semibold text-base-content mb-4 flex items-center gap-2">
                   <MdPhotoLibrary className="text-primary text-xl" />
                   Images
                 </h3>
@@ -254,7 +253,7 @@ const IssueDetails = () => {
                   {issue.images.map((img, idx) => (
                     <div
                       key={idx}
-                      className="relative group rounded-xl overflow-hidden aspect-video bg-gray-100 dark:bg-slate-700 cursor-zoom-in"
+                      className="relative group rounded-xl overflow-hidden aspect-video bg-base-300 cursor-zoom-in"
                       onClick={() => setSelectedImage(img)}
                     >
                       <img
@@ -274,19 +273,19 @@ const IssueDetails = () => {
             )}
 
             {/* Description */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+            <div className="bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm">
+              <h2 className="text-2xl font-bold text-base-content mb-4 flex items-center gap-2">
                 <MdDescription className="text-primary text-xl" />
                 Description
               </h2>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">
+              <p className="text-base-content/80 leading-relaxed whitespace-pre-wrap">
                 {issue.description}
               </p>
             </div>
 
             {/* Timeline */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+            <div className="bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm">
+              <h2 className="text-2xl font-bold text-base-content mb-6 flex items-center gap-2">
                 <MdHistory className="text-primary text-xl" />
                 Timeline
               </h2>
@@ -296,14 +295,14 @@ const IssueDetails = () => {
                     <div key={entry._id} className="flex gap-4 relative">
                       <div className="flex flex-col items-center">
                         <div
-                          className={`w-4 h-4 rounded-full border-2 border-white dark:border-slate-800 ${
+                          className={`w-4 h-4 rounded-full border-2 border-base-100 ${
                             idx === 0
                               ? "bg-primary ring-2 ring-primary/20"
-                              : "bg-gray-300 dark:bg-gray-600"
+                              : "bg-base-300"
                           }`}
                         ></div>
                         {idx < timeline.length - 1 && (
-                          <div className="w-0.5 h-full bg-gray-200 dark:bg-gray-700 mt-2 min-h-15"></div>
+                          <div className="w-0.5 h-full bg-base-200 mt-2 min-h-15"></div>
                         )}
                       </div>
                       <div className="flex-1 pb-2">
@@ -316,7 +315,7 @@ const IssueDetails = () => {
                             {entry.status.charAt(0).toUpperCase() +
                               entry.status.slice(1).replace("-", " ")}
                           </span>
-                          <span className="text-sm text-gray-500 dark:text-gray-400">
+                          <span className="text-sm text-base-content/50">
                             {new Date(entry.createdAt).toLocaleDateString(
                               "en-US",
                               {
@@ -329,13 +328,13 @@ const IssueDetails = () => {
                             )}
                           </span>
                         </div>
-                        <p className="text-gray-800 dark:text-gray-200 font-medium mb-2">
+                        <p className="text-base-content font-medium mb-2">
                           {entry.note}
                         </p>
-                        <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                        <div className="flex items-center gap-2 text-sm text-base-content/50">
                           <MdPerson className="text-base" />
                           <span>{entry.updatedBy?.name || "System"}</span>
-                          <span className="text-gray-400">•</span>
+                          <span className="text-base-content/20">•</span>
                           <span className="capitalize">
                             {entry.updatedBy?.role || "system"}
                           </span>
@@ -344,7 +343,7 @@ const IssueDetails = () => {
                     </div>
                   ))
                 ) : (
-                  <p className="text-gray-500 dark:text-gray-400 text-center py-8">
+                  <p className="text-base-content/40 text-center py-8">
                     No timeline entries yet
                   </p>
                 )}
@@ -359,7 +358,7 @@ const IssueDetails = () => {
             className="space-y-6"
           >
             {/* Status & Actions */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm sticky top-24">
+            <div className="bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm sticky top-24">
               <div className="flex items-center gap-2 mb-6 flex-wrap">
                 <span
                   className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-semibold border ${getStatusColor(
@@ -372,8 +371,8 @@ const IssueDetails = () => {
                 <span
                   className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-semibold border ${
                     issue.priority === "high"
-                      ? "bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 border-red-200 dark:border-red-800"
-                      : "bg-gray-50 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-700"
+                      ? "bg-error/10 text-error border-error/20"
+                      : "bg-base-200 text-base-content/60 border-base-300"
                   }`}
                 >
                   {issue.priority === "high"
@@ -381,7 +380,7 @@ const IssueDetails = () => {
                     : "Normal Priority"}
                 </span>
                 {issue.isBoosted && (
-                  <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-semibold bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300 border border-yellow-200 dark:border-yellow-800">
+                  <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-semibold bg-yellow-100 text-yellow-800 border border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-300 dark:border-yellow-800">
                     <MdLocalFireDepartment className="text-sm" />
                     Boosted
                   </span>
@@ -394,8 +393,8 @@ const IssueDetails = () => {
                   disabled={upvoteMutation.isPending || dbUser?.isBlocked}
                   className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl transition-all font-semibold ${
                     isOwner || dbUser?.isBlocked
-                      ? "bg-gray-100 dark:bg-slate-700 text-gray-400 dark:text-gray-500 cursor-not-allowed"
-                      : "bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300 hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/20 dark:hover:text-primary"
+                      ? "bg-base-200 text-base-content/40 cursor-not-allowed"
+                      : "bg-base-200 text-base-content/70 hover:bg-primary/10 hover:text-primary"
                   }`}
                   title={
                     dbUser?.isBlocked
@@ -413,7 +412,7 @@ const IssueDetails = () => {
                   <button
                     onClick={() => navigate(`/issues/${id}/edit`)}
                     disabled={dbUser?.isBlocked}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-primary text-white hover:bg-primary/90 transition-all font-semibold shadow-md shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-primary text-primary-content hover:bg-primary/90 transition-all font-semibold shadow-md shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <MdEdit className="text-xl" />
                     <span>Edit Issue</span>
@@ -424,7 +423,7 @@ const IssueDetails = () => {
                   <button
                     onClick={handleDelete}
                     disabled={dbUser?.isBlocked}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-red-500 text-white hover:bg-red-600 transition-all font-semibold shadow-md shadow-red-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-error text-error-content hover:bg-error/90 transition-all font-semibold shadow-md shadow-error/20 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <MdDelete className="text-xl" />
                     <span>Delete Issue</span>
@@ -447,13 +446,13 @@ const IssueDetails = () => {
             </div>
 
             {/* Location */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+            <div className="bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm">
+              <h3 className="text-lg font-bold text-base-content mb-4 flex items-center gap-2">
                 <MdLocationOn className="text-primary text-xl" />
                 Location
               </h3>
-              <p className="text-gray-700 dark:text-gray-300 flex items-start gap-2">
-                <MdPlace className="text-gray-400 mt-0.5" />
+              <p className="text-base-content/80 flex items-start gap-2">
+                <MdPlace className="text-base-content/40 mt-0.5" />
                 <span>{issue.location?.address}</span>
               </p>
             </div>
@@ -463,28 +462,28 @@ const IssueDetails = () => {
               const staff = issue.assignedStaff || issue.assignedStaffId;
               if (!staff) return null;
               return (
-                <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                <div className="bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm">
+                  <h3 className="text-lg font-bold text-base-content mb-4 flex items-center gap-2">
                     <MdBadge className="text-primary text-xl" />
                     Assigned Staff
                   </h3>
-                  <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-slate-700/50">
+                  <div className="flex items-center gap-3 p-3 rounded-xl bg-base-200/50">
                     {staff.photoURL ? (
                       <img
                         src={staff.photoURL}
                         alt={staff.name}
-                        className="w-12 h-12 rounded-full border-2 border-white dark:border-slate-600"
+                        className="w-12 h-12 rounded-full border-2 border-base-100"
                       />
                     ) : (
-                      <div className="w-12 h-12 rounded-full bg-linear-to-brrom-primary to-blue-600 flex items-center justify-center text-white font-semibold shadow-md">
+                      <div className="w-12 h-12 rounded-full bg-linear-to-br from-primary to-blue-600 flex items-center justify-center text-white font-semibold shadow-md">
                         {staff.name?.charAt(0)}
                       </div>
                     )}
                     <div>
-                      <p className="text-gray-900 dark:text-white font-semibold">
+                      <p className="text-base-content font-semibold">
                         {staff.name}
                       </p>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                      <p className="text-sm text-base-content/50">
                         {staff.email}
                       </p>
                     </div>
@@ -495,17 +494,17 @@ const IssueDetails = () => {
 
             {/* Submitter Info */}
             {issue.submitterId && (
-              <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <div className="bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm">
+                <h3 className="text-lg font-bold text-base-content mb-4 flex items-center gap-2">
                   <MdPerson className="text-primary text-xl" />
                   Reported By
                 </h3>
-                <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-slate-700/50">
+                <div className="flex items-center gap-3 p-3 rounded-xl bg-base-200/50">
                   {issue.submitterId.photoURL ? (
                     <img
                       src={issue.submitterId.photoURL}
                       alt={issue.submitterId.name}
-                      className="w-12 h-12 rounded-full border-2 border-white dark:border-slate-600"
+                      className="w-12 h-12 rounded-full border-2 border-base-100"
                     />
                   ) : (
                     <div className="w-12 h-12 rounded-full bg-linear-to-br from-primary to-blue-600 flex items-center justify-center text-white font-semibold shadow-md">
@@ -513,10 +512,10 @@ const IssueDetails = () => {
                     </div>
                   )}
                   <div>
-                    <p className="text-gray-900 dark:text-white font-semibold">
+                    <p className="text-base-content font-semibold">
                       {issue.submitterId.name}
                     </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-sm text-base-content/50">
                       {issue.submitterId.email}
                     </p>
                   </div>

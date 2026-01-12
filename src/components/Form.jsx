@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { useState } from "react";
-import { useFormValidation, validationRules } from "../hooks/useFormValidation";
+import { MdError } from "react-icons/md";
 
 const FormField = ({
   label,
@@ -28,12 +28,12 @@ const FormField = ({
           htmlFor={name}
           className={`block text-sm font-medium ${
             hasError
-              ? "text-red-600 dark:text-red-400"
-              : "text-gray-700 dark:text-gray-300"
+              ? "text-error"
+              : "text-base-content/80"
           }`}
         >
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+          {required && <span className="text-error ml-1">*</span>}
         </label>
       )}
 
@@ -41,7 +41,7 @@ const FormField = ({
         {Icon && (
           <Icon
             className={`absolute left-3 top-1/2 -translate-y-1/2 text-xl ${
-              hasError ? "text-red-500" : "text-gray-400"
+              hasError ? "text-error" : "text-base-content/40"
             }`}
           />
         )}
@@ -59,8 +59,8 @@ const FormField = ({
             Icon ? "pl-12" : "pl-4"
           } ${
             hasError
-              ? "border-red-500 bg-red-50 dark:bg-red-900/20 text-red-900 dark:text-red-100 placeholder-red-400 focus:ring-red-500/50 focus:border-red-500"
-              : "border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-primary/50 focus:border-primary"
+              ? "border-error bg-error/5 text-error placeholder:text-error/40 focus:ring-error/50"
+              : "border-base-300 bg-base-200/50 text-base-content placeholder:text-base-content/40 focus:ring-primary/50 focus:border-primary"
           } focus:outline-none focus:ring-2 ${
             disabled ? "opacity-50 cursor-not-allowed" : ""
           }`}
@@ -72,14 +72,15 @@ const FormField = ({
         <motion.p
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-sm text-red-600 dark:text-red-400 flex items-center gap-1"
+          className="text-sm text-error flex items-center gap-1"
         >
+          <MdError />
           {error}
         </motion.p>
       )}
 
       {!hasError && helperText && (
-        <p className="text-sm text-gray-500 dark:text-gray-400">{helperText}</p>
+        <p className="text-sm text-base-content/50">{helperText}</p>
       )}
     </div>
   );
@@ -110,12 +111,12 @@ const TextArea = ({
           htmlFor={name}
           className={`block text-sm font-medium ${
             hasError
-              ? "text-red-600 dark:text-red-400"
-              : "text-gray-700 dark:text-gray-300"
+              ? "text-error"
+              : "text-base-content/80"
           }`}
         >
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+          {required && <span className="text-error ml-1">*</span>}
         </label>
       )}
 
@@ -130,8 +131,8 @@ const TextArea = ({
         rows={rows}
         className={`w-full px-4 py-3 rounded-xl border transition-all resize-vertical ${
           hasError
-            ? "border-red-500 bg-red-50 dark:bg-red-900/20 text-red-900 dark:text-red-100 placeholder-red-400 focus:ring-red-500/50 focus:border-red-500"
-            : "border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-primary/50 focus:border-primary"
+            ? "border-error bg-error/5 text-error placeholder:text-error/40 focus:ring-error/50"
+            : "border-base-300 bg-base-200/50 text-base-content placeholder:text-base-content/40 focus:ring-primary/50 focus:border-primary"
         } focus:outline-none focus:ring-2 ${
           disabled ? "opacity-50 cursor-not-allowed" : ""
         }`}
@@ -142,14 +143,15 @@ const TextArea = ({
         <motion.p
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-sm text-red-600 dark:text-red-400 flex items-center gap-1"
+          className="text-sm text-error flex items-center gap-1"
         >
+          <MdError />
           {error}
         </motion.p>
       )}
 
       {!hasError && helperText && (
-        <p className="text-sm text-gray-500 dark:text-gray-400">{helperText}</p>
+        <p className="text-sm text-base-content/50">{helperText}</p>
       )}
     </div>
   );
@@ -179,12 +181,12 @@ const Select = ({
           htmlFor={name}
           className={`block text-sm font-medium ${
             hasError
-              ? "text-red-600 dark:text-red-400"
-              : "text-gray-700 dark:text-gray-300"
+              ? "text-error"
+              : "text-base-content/80"
           }`}
         >
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+          {required && <span className="text-error ml-1">*</span>}
         </label>
       )}
 
@@ -197,18 +199,18 @@ const Select = ({
         disabled={disabled}
         className={`w-full px-4 py-3 rounded-xl border transition-all ${
           hasError
-            ? "border-red-500 bg-red-50 dark:bg-red-900/20 text-red-900 dark:text-red-100 focus:ring-red-500/50 focus:border-red-500"
-            : "border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-primary/50 focus:border-primary"
+            ? "border-error bg-error/5 text-error focus:ring-error/50"
+            : "border-base-300 bg-base-200/50 text-base-content focus:ring-primary/50 focus:border-primary"
         } focus:outline-none focus:ring-2 ${
           disabled ? "opacity-50 cursor-not-allowed" : ""
         }`}
         {...props}
       >
-        <option value="" disabled>
+        <option value="" disabled className="bg-base-100">
           {placeholder}
         </option>
         {options.map((option) => (
-          <option key={option.value} value={option.value}>
+          <option key={option.value} value={option.value} className="bg-base-100">
             {option.label}
           </option>
         ))}
@@ -218,8 +220,9 @@ const Select = ({
         <motion.p
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-sm text-red-600 dark:text-red-400 flex items-center gap-1"
+          className="text-sm text-error flex items-center gap-1"
         >
+          <MdError />
           {error}
         </motion.p>
       )}
@@ -254,8 +257,8 @@ const Checkbox = ({
           disabled={disabled}
           className={`mt-1 w-5 h-5 rounded border-2 transition-all ${
             hasError
-              ? "border-red-500 text-red-500 focus:ring-red-500/50"
-              : "border-gray-300 dark:border-gray-600 text-primary focus:ring-primary/50"
+              ? "border-error text-error focus:ring-error/50"
+              : "border-base-300 bg-base-200 text-primary focus:ring-primary/50"
           } focus:outline-none focus:ring-2 ${
             disabled ? "opacity-50 cursor-not-allowed" : ""
           }`}
@@ -264,12 +267,12 @@ const Checkbox = ({
         <span
           className={`text-sm leading-tight ${
             hasError
-              ? "text-red-600 dark:text-red-400"
-              : "text-gray-700 dark:text-gray-300"
+              ? "text-error"
+              : "text-base-content/80"
           }`}
         >
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+          {required && <span className="text-error ml-1">*</span>}
         </span>
       </label>
 
@@ -277,8 +280,9 @@ const Checkbox = ({
         <motion.p
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-sm text-red-600 dark:text-red-400 flex items-center gap-1 mt-1"
+          className="text-sm text-error flex items-center gap-1 mt-1"
         >
+          <MdError />
           {error}
         </motion.p>
       )}
@@ -319,12 +323,12 @@ const FileUpload = ({
         <label
           className={`block text-sm font-medium ${
             hasError
-              ? "text-red-600 dark:text-red-400"
-              : "text-gray-700 dark:text-gray-300"
+              ? "text-error"
+              : "text-base-content/80"
           }`}
         >
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+          {required && <span className="text-error ml-1">*</span>}
         </label>
       )}
 
@@ -338,8 +342,8 @@ const FileUpload = ({
           disabled={disabled}
           className={`w-full px-4 py-3 rounded-xl border transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90 ${
             hasError
-              ? "border-red-500 bg-red-50 dark:bg-red-900/20 text-red-900 dark:text-red-100 file:bg-red-500 hover:file:bg-red-600 focus:ring-red-500/50 focus:border-red-500"
-              : "border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-primary/50 focus:border-primary"
+              ? "border-error bg-error/5 text-error file:bg-error hover:file:bg-error/90 focus:ring-error/50"
+              : "border-base-300 bg-base-200/50 text-base-content focus:ring-primary/50 focus:border-primary"
           } focus:outline-none focus:ring-2 ${
             disabled ? "opacity-50 cursor-not-allowed" : ""
           }`}
@@ -347,7 +351,7 @@ const FileUpload = ({
         />
 
         {fileName && (
-          <div className="mt-2 px-3 py-1 rounded-lg bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 text-sm">
+          <div className="mt-2 px-3 py-1 rounded-lg bg-success/10 text-success text-sm">
             📎 {fileName}
           </div>
         )}
@@ -357,14 +361,15 @@ const FileUpload = ({
         <motion.p
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-sm text-red-600 dark:text-red-400 flex items-center gap-1"
+          className="text-sm text-error flex items-center gap-1"
         >
+          <MdError />
           {error}
         </motion.p>
       )}
 
       {!hasError && helperText && (
-        <p className="text-sm text-gray-500 dark:text-gray-400">{helperText}</p>
+        <p className="text-sm text-base-content/50">{helperText}</p>
       )}
     </div>
   );
@@ -375,12 +380,12 @@ const FormSection = ({ title, description, children, className = "" }) => (
     {(title || description) && (
       <div>
         {title && (
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+          <h3 className="text-xl font-semibold text-base-content mb-2">
             {title}
           </h3>
         )}
         {description && (
-          <p className="text-gray-600 dark:text-gray-400">{description}</p>
+          <p className="text-base-content/60">{description}</p>
         )}
       </div>
     )}

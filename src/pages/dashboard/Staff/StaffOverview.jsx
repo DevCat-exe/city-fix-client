@@ -21,7 +21,7 @@ import {
   CartesianGrid,
   Legend,
 } from "recharts";
-import { motion as Motion } from "framer-motion";
+import { motion as Motion } from "motion/react";
 import { Link } from "react-router-dom";
 import StatusBadge from "../../../components/StatusBadge";
 
@@ -65,7 +65,7 @@ const StaffOverview = () => {
   if (error) {
     return (
       <div className="text-center py-12">
-        <p className="text-red-600">Error: {error}</p>
+        <p className="text-error">Error: {error}</p>
       </div>
     );
   }
@@ -116,10 +116,10 @@ const StaffOverview = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+        <h1 className="text-3xl font-bold text-base-content">
           Welcome, {dbUser?.name}!
         </h1>
-        <p className="text-gray-600 dark:text-gray-300 mt-1">
+        <p className="text-base-content/60 mt-1">
           Here's an overview of your assigned issues
         </p>
       </div>
@@ -156,8 +156,8 @@ const StaffOverview = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Priority Distribution */}
         {priorityData.length > 0 && (
-          <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+          <div className="bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm">
+            <h2 className="text-xl font-semibold text-base-content mb-4">
               Priority Distribution
             </h2>
             <ResponsiveContainer width="100%" height={250}>
@@ -176,7 +176,9 @@ const StaffOverview = () => {
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip 
+                  contentStyle={{ backgroundColor: 'var(--color-base-100)', borderColor: 'var(--color-base-300)', color: 'var(--color-base-content)' }}
+                />
               </PieChart>
             </ResponsiveContainer>
           </div>
@@ -184,14 +186,16 @@ const StaffOverview = () => {
 
         {/* Status Breakdown */}
         {statusData.length > 0 && (
-          <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Status Breakdown</h2>
+          <div className="bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm">
+            <h2 className="text-xl font-semibold text-base-content mb-4">Status Breakdown</h2>
             <ResponsiveContainer width="100%" height={250}>
               <BarChart data={statusData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
-                <Tooltip />
+                <Tooltip 
+                  contentStyle={{ backgroundColor: 'var(--color-base-100)', borderColor: 'var(--color-base-300)', color: 'var(--color-base-content)' }}
+                />
                 <Legend />
                 <Bar dataKey="count" fill="#137fec" />
               </BarChart>
@@ -201,22 +205,22 @@ const StaffOverview = () => {
       </div>
 
       {/* Today's Tasks */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm mb-6">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Today's Assigned Issues</h2>
+      <div className="bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">Today's Assigned Issues</h2>
         {todayIssues.length === 0 ? (
-          <p className="text-gray-500 dark:text-gray-400">No issues assigned today</p>
+          <p className="text-base-content/40">No issues assigned today</p>
         ) : (
           <div className="space-y-3">
             {todayIssues.map((issue) => (
               <div
                 key={issue._id}
-                className="flex items-center justify-between p-4 bg-gray-50 dark:bg-slate-700 rounded-xl border border-gray-100 dark:border-slate-600"
+                className="flex items-center justify-between p-4 bg-base-200 rounded-xl border border-base-300"
               >
                 <div className="flex-1">
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">{issue.title}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">{issue.category}</p>
+                  <h3 className="font-semibold text-base-content mb-1">{issue.title}</h3>
+                  <p className="text-sm text-base-content/60">{issue.category}</p>
                   {issue.isBoosted && (
-                    <span className="inline-block mt-2 px-3 py-1 text-xs font-semibold bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full">
+                    <span className="inline-block mt-2 px-3 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 border border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-300 dark:border-yellow-800 rounded-full">
                       Boosted
                     </span>
                   )}
@@ -230,9 +234,9 @@ const StaffOverview = () => {
 
       {/* Boosted Issues (High Priority) */}
       {stats.boosted > 0 && (
-        <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
+        <div className="bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Boosted Issues (Priority)</h2>
+            <h2 className="text-xl font-semibold text-base-content">Boosted Issues (Priority)</h2>
             <Link
               to="/dashboard/staff/assigned"
               className="text-primary hover:underline font-medium"
@@ -247,11 +251,11 @@ const StaffOverview = () => {
               .map((issue) => (
                 <div
                   key={issue._id}
-                  className="flex items-center justify-between p-4 bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-800 rounded-xl"
+                  className="flex items-center justify-between p-4 bg-warning/10 border border-warning/20 rounded-xl"
                 >
                   <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-1">{issue.title}</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                    <h3 className="font-semibold text-base-content mb-1">{issue.title}</h3>
+                    <p className="text-sm text-base-content/60">
                       {issue.location?.address}
                     </p>
                   </div>

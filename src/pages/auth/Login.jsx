@@ -115,10 +115,10 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-50 to-white dark:from-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-gradient-page">
       <Navbar />
       <div className="flex flex-col md:flex-row min-h-[calc(100vh-64px)]">
-        <div className="relative hidden md:flex md:w-1/2 flex-col items-start justify-end p-12 bg-gradient-to-br from-primary via-blue-600 to-blue-700 text-white overflow-hidden">
+        <div className="relative hidden md:flex md:w-1/2 flex-col items-start justify-end p-12 bg-linear-to-br from-primary via-blue-600 to-blue-700 text-white overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img
               alt="City infrastructure"
@@ -157,46 +157,46 @@ const Login = () => {
           </div>
         </div>
         <div className="flex w-full md:w-1/2 flex-col items-center justify-center p-4 sm:p-6 md:p-8">
-          <div className="w-full max-w-md bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-gray-200 dark:border-slate-700 p-6 sm:p-8">
+          <div className="w-full max-w-md bg-base-100 rounded-2xl shadow-xl border border-base-200 p-6 sm:p-8">
             <div className="pb-4">
-              <div className="flex bg-gray-100 dark:bg-slate-700 rounded-xl p-1 gap-1">
-                <button className="flex-1 flex items-center justify-center py-3 px-4 rounded-lg font-semibold text-sm transition-all bg-white dark:bg-slate-600 text-primary dark:text-white shadow-md">
+              <div className="flex bg-base-200 rounded-xl p-1 gap-1">
+                <button className="flex-1 flex items-center justify-center py-3 px-4 rounded-lg font-semibold text-sm transition-all bg-base-100 text-primary shadow-md">
                   Login
                 </button>
                 <button
                   onClick={() => navigate("/signup")}
-                  className="flex-1 flex items-center justify-center py-3 px-4 rounded-lg font-semibold text-sm transition-all text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                  className="flex-1 flex items-center justify-center py-3 px-4 rounded-lg font-semibold text-sm transition-all text-base-content/60 hover:text-base-content"
                 >
                   Sign Up
                 </button>
               </div>
             </div>
             <div className="text-center mb-6">
-              <h1 className="text-3xl font-black text-gray-900 dark:text-white mb-2 tracking-tight">
+              <h1 className="text-3xl font-black text-base-content mb-2 tracking-tight">
                 Welcome Back
               </h1>
-              <p className="text-gray-500 dark:text-gray-400">
+              <p className="text-base-content/60">
                 Sign in to continue to CityFix
               </p>
             </div>
             <form onSubmit={handleEmailLogin}>
               <div className="flex flex-col gap-4 py-3">
                 <label className="flex flex-col w-full">
-                  <p className="text-gray-900 dark:text-white text-base font-medium leading-normal pb-2">
+                  <p className="text-base-content font-medium pb-2">
                     Email
                   </p>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 h-14 placeholder:text-gray-500 dark:placeholder-slate-400 p-[15px] text-base font-normal leading-normal"
+                    className="w-full min-h-14 px-4 rounded-lg text-base-content focus:outline-none focus:ring-2 focus:ring-primary/50 border border-base-300 bg-base-200 placeholder:text-base-content/40 transition-all"
                     placeholder="Enter your email"
                     required
                   />
                 </label>
                 <label className="flex flex-col w-full">
                   <div className="flex justify-between items-center pb-2">
-                    <p className="text-gray-900 dark:text-white text-base font-medium leading-normal">
+                    <p className="text-base-content font-medium">
                       Password
                     </p>
                     <Link
@@ -211,14 +211,14 @@ const Login = () => {
                       type={showPassword ? "text" : "password"}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 h-14 placeholder:text-gray-500 dark:placeholder-slate-400 p-[15px] text-base font-normal leading-normal"
+                      className="w-full min-h-14 px-4 rounded-lg text-base-content focus:outline-none focus:ring-2 focus:ring-primary/50 border border-base-300 bg-base-200 placeholder:text-base-content/40 transition-all"
                       placeholder="Enter your password"
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-200"
+                      className="absolute inset-y-0 right-0 flex items-center pr-3 text-base-content/40 hover:text-base-content"
                     >
                       <MdVisibility className="text-xl" />
                     </button>
@@ -229,7 +229,7 @@ const Login = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="flex items-center justify-center gap-2 w-full h-14 px-4 rounded-xl bg-gradient-to-r from-primary to-blue-600 text-white text-base font-bold hover:from-primary/90 hover:to-blue-600/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-slate-800 disabled:opacity-50 transition-all shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30"
+                  className="flex items-center justify-center gap-2 w-full h-14 px-4 rounded-xl bg-linear-to-r from-primary to-blue-600 text-white text-base font-bold hover:from-primary/90 hover:to-blue-600/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 transition-all shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30"
                 >
                   {loading ? (
                     <>
@@ -245,10 +245,10 @@ const Login = () => {
                 </button>
                 <div className="relative py-2">
                   <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-300 dark:border-slate-600"></div>
+                    <div className="w-full border-t border-base-300"></div>
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="px-2 bg-white dark:bg-slate-800 text-gray-500 dark:text-gray-400">
+                    <span className="px-2 bg-base-100 text-base-content/50">
                       Demo Access
                     </span>
                   </div>
@@ -259,7 +259,7 @@ const Login = () => {
                     onClick={() =>
                       handleDemoLogin("admin@cityfix.com", "Admin123!")
                     }
-                    className="px-2 py-2 rounded-lg text-[10px] font-bold bg-rose-50 text-rose-600 dark:bg-rose-900/20 dark:text-rose-400 border border-rose-100 dark:border-rose-800 hover:bg-rose-100 dark:hover:bg-rose-900/40 transition-colors uppercase tracking-wider"
+                    className="px-2 py-2 rounded-lg text-[10px] font-bold bg-error/10 text-error border border-error/20 hover:bg-error/20 transition-colors uppercase tracking-wider"
                   >
                     Admin
                   </button>
@@ -268,7 +268,7 @@ const Login = () => {
                     onClick={() =>
                       handleDemoLogin("staff1@cityfix.com", "Staff123!")
                     }
-                    className="px-2 py-2 rounded-lg text-[10px] font-bold bg-amber-50 text-amber-600 dark:bg-amber-900/20 dark:text-amber-400 border border-amber-100 dark:border-amber-800 hover:bg-amber-100 dark:hover:bg-amber-900/40 transition-colors uppercase tracking-wider"
+                    className="px-2 py-2 rounded-lg text-[10px] font-bold bg-warning/10 text-warning border border-warning/20 hover:bg-warning/20 transition-colors uppercase tracking-wider"
                   >
                     Staff
                   </button>
@@ -277,28 +277,28 @@ const Login = () => {
                     onClick={() =>
                       handleDemoLogin("alex@email.com", "Citizen123!")
                     }
-                    className="px-2 py-2 rounded-lg text-[10px] font-bold bg-teal-50 text-teal-600 dark:bg-teal-900/20 dark:text-teal-400 border border-teal-100 dark:border-teal-800 hover:bg-teal-100 dark:hover:bg-teal-900/40 transition-colors uppercase tracking-wider"
+                    className="px-2 py-2 rounded-lg text-[10px] font-bold bg-success/10 text-success border border-success/20 hover:bg-success/20 transition-colors uppercase tracking-wider"
                   >
                     Citizen
                   </button>
                 </div>
                 <div className="relative py-2 mt-2">
                   <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-100 dark:border-slate-800"></div>
+                    <div className="w-full border-t border-base-200"></div>
                   </div>
                 </div>
                 <button
                   type="button"
                   onClick={handleGoogleLogin}
                   disabled={loading}
-                  className="flex items-center justify-center gap-3 w-full h-14 px-4 rounded-xl bg-white dark:bg-slate-700 text-gray-700 dark:text-slate-200 border-2 border-gray-300 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 dark:focus:ring-offset-slate-800 disabled:opacity-50 transition-all font-semibold"
+                  className="flex items-center justify-center gap-3 w-full h-14 px-4 rounded-xl bg-base-100 text-base-content/70 border-2 border-base-300 hover:bg-base-200 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all font-semibold"
                 >
                   <FcGoogle className="w-6 h-6" />
                   <span>Continue with Google</span>
                 </button>
               </div>
               <div className="pt-6 text-center">
-                <p className="text-sm text-gray-600 dark:text-slate-400">
+                <p className="text-sm text-base-content/60">
                   Don't have an account?{" "}
                   <button
                     type="button"

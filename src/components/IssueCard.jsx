@@ -51,25 +51,25 @@ const IssueCard = ({ issue }) => {
   const getStatusColor = (status) => {
     switch (status) {
       case "pending":
-        return "bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800";
+        return "bg-warning/10 text-warning border-warning/20";
       case "in-progress":
       case "working":
-        return "bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800";
+        return "bg-info/10 text-info border-info/20";
       case "resolved":
-        return "bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800";
+        return "bg-success/10 text-success border-success/20";
       case "closed":
-        return "bg-gray-50 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700";
+        return "bg-base-200 text-base-content/60 border-base-300";
       case "rejected":
-        return "bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 border-red-200 dark:border-red-800";
+        return "bg-error/10 text-error border-error/20";
       default:
-        return "bg-gray-50 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700";
+        return "bg-base-200 text-base-content/60 border-base-300";
     }
   };
 
   const getPriorityColor = (priority) => {
     return priority === "high"
-      ? "bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 border-red-200 dark:border-red-800"
-      : "bg-gray-50 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-700";
+      ? "bg-error/10 text-error border-error/20"
+      : "bg-base-200 text-base-content/60 border-base-300";
   };
 
   return (
@@ -78,38 +78,30 @@ const IssueCard = ({ issue }) => {
       animate={{ opacity: 1, y: 0 }}
       whileHover={{
         y: -5,
-        boxShadow:
-          "0 20px 25px -5px rgba(19, 127, 236, 0.1), 0 10px 10px -5px rgba(19, 127, 236, 0.04)",
       }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="group flex flex-col bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-200 dark:border-slate-700 overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1"
+      className="group flex flex-col bg-base-100 rounded-2xl shadow-sm border border-base-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1"
     >
       {issue.images && issue.images.length > 0 && (
-        <div className="relative w-full aspect-video bg-gray-200 dark:bg-slate-700 overflow-hidden">
+        <div className="relative w-full aspect-video bg-base-300 overflow-hidden">
           <div
             className="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110"
             style={{ backgroundImage: `url("${issue.images[0]}")` }}
           ></div>
           <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
-          {issue.isBoosted && (
-            <div className="absolute top-3 right-3 flex items-center gap-1 px-2.5 py-1 rounded-full bg-yellow-400 text-yellow-900 text-xs font-bold shadow-lg">
-              <MdLocalFireDepartment className="text-sm" />
-              <span>Boosted</span>
-            </div>
-          )}
         </div>
       )}
       <div className="p-6 flex flex-col grow">
         <div className="flex items-center gap-2 mb-2">
-          <span className="inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary border border-primary/20">
+          <span className="inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
             {issue.category}
           </span>
         </div>
-        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-primary dark:group-hover:text-primary transition-colors">
+        <h3 className="text-xl font-bold text-base-content mb-3 line-clamp-2 group-hover:text-primary transition-colors">
           {issue.title}
         </h3>
         {issue.location?.address && (
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 flex items-center gap-1.5">
+          <p className="text-sm text-base-content/60 mb-4 flex items-center gap-1.5">
             <MdLocationOn className="text-base" />
             <span className="line-clamp-1">{issue.location.address}</span>
           </p>
@@ -130,12 +122,18 @@ const IssueCard = ({ issue }) => {
           >
             {issue.priority === "high" ? "High Priority" : "Normal"}
           </span>
+          {issue.isBoosted && (
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-yellow-100 text-yellow-800 border border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-300 dark:border-yellow-800">
+              <MdLocalFireDepartment className="text-xs" />
+              Boosted
+            </span>
+          )}
           <button
             onClick={handleUpvote}
             disabled={upvoteMutation.isPending || dbUser?.isBlocked}
             className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${isOwner || dbUser?.isBlocked
-              ? "bg-gray-100 dark:bg-slate-700 text-gray-400 dark:text-gray-500 cursor-not-allowed opacity-70"
-              : "bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300 hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/20 dark:hover:text-primary"
+              ? "bg-base-200 text-base-content/40 cursor-not-allowed opacity-70"
+              : "bg-base-200 text-base-content/70 hover:bg-primary/10 hover:text-primary"
               }`}
             title={
               dbUser?.isBlocked

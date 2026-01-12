@@ -85,7 +85,7 @@ const AdminOverview = () => {
   if (!firebaseUser || !dbUser) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-600">Please log in to view the dashboard.</p>
+        <p className="text-base-content/60">Please log in to view the dashboard.</p>
       </div>
     );
   }
@@ -103,7 +103,7 @@ const AdminOverview = () => {
   if (error) {
     return (
       <div className="text-center py-12">
-        <p className="text-red-600">Error: {error}</p>
+        <p className="text-error">Error: {error}</p>
       </div>
     );
   }
@@ -146,8 +146,8 @@ const AdminOverview = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Admin Dashboard</h1>
-        <p className="text-gray-600 dark:text-gray-300 mt-1">System-wide overview and analytics</p>
+        <h1 className="text-3xl font-bold text-base-content">Admin Dashboard</h1>
+        <p className="text-base-content/60 mt-1">System-wide overview and analytics</p>
       </div>
 
       {/* Stats Cards */}
@@ -194,14 +194,16 @@ const AdminOverview = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Issues by Category */}
         {categoryData.length > 0 && (
-          <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Issues by Category</h2>
+          <div className="bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm">
+            <h2 className="text-xl font-semibold text-base-content mb-4">Issues by Category</h2>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={categoryData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
-                <Tooltip />
+                <Tooltip 
+                  contentStyle={{ backgroundColor: 'var(--color-base-100)', borderColor: 'var(--color-base-300)', color: 'var(--color-base-content)' }}
+                />
                 <Legend />
                 <Bar dataKey="count" fill="#137fec" />
               </BarChart>
@@ -211,14 +213,16 @@ const AdminOverview = () => {
 
         {/* Status Distribution */}
         {statusData.length > 0 && (
-          <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Status Distribution</h2>
+          <div className="bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm">
+            <h2 className="text-xl font-semibold text-base-content mb-4">Status Distribution</h2>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={statusData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
-                <Tooltip />
+                <Tooltip 
+                  contentStyle={{ backgroundColor: 'var(--color-base-100)', borderColor: 'var(--color-base-300)', color: 'var(--color-base-content)' }}
+                />
                 <Legend />
                 <Bar dataKey="count" fill="#10b981" />
               </BarChart>
@@ -228,9 +232,9 @@ const AdminOverview = () => {
       </div>
 
       {/* Latest Issues */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
+      <div className="bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Latest Issues</h2>
+          <h2 className="text-xl font-semibold text-base-content">Latest Issues</h2>
           <Link
             to="/dashboard/admin/all-issues"
             className="text-primary hover:underline font-medium"
@@ -239,17 +243,17 @@ const AdminOverview = () => {
           </Link>
         </div>
         {issues.length === 0 ? (
-          <p className="text-gray-500 dark:text-gray-400">No issues yet</p>
+          <p className="text-base-content/40">No issues yet</p>
         ) : (
           <div className="space-y-3">
             {issues.slice(0, 5).map((issue) => (
               <div
                 key={issue._id}
-                className="flex items-center justify-between p-4 bg-gray-50 dark:bg-slate-700 rounded-xl border border-gray-100 dark:border-slate-600"
+                className="flex items-center justify-between p-4 bg-base-200 rounded-xl border border-base-300"
               >
                 <div className="flex-1">
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">{issue.title}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                  <h3 className="font-semibold text-base-content mb-1">{issue.title}</h3>
+                  <p className="text-sm text-base-content/60">
                     {issue.category} • {issue.location?.address}
                   </p>
                 </div>
@@ -261,9 +265,9 @@ const AdminOverview = () => {
       </div>
 
       {/* Latest Payments */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
+      <div className="bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm mt-8">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Recent Payments</h2>
+          <h2 className="text-xl font-semibold text-base-content">Recent Payments</h2>
           <Link
             to="/dashboard/admin/payments"
             className="text-primary hover:underline font-medium"
@@ -272,25 +276,25 @@ const AdminOverview = () => {
           </Link>
         </div>
         {payments.length === 0 ? (
-          <p className="text-gray-500 dark:text-gray-400">No payments yet</p>
+          <p className="text-base-content/40">No payments yet</p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="border-b border-gray-200 dark:border-slate-600">
+              <thead className="border-b border-base-200">
                 <tr>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-white">User</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-white">Purpose</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-white">Amount</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-white">Date</th>
+                  <th className="text-left py-3 px-4 font-semibold text-base-content">User</th>
+                  <th className="text-left py-3 px-4 font-semibold text-base-content">Purpose</th>
+                  <th className="text-left py-3 px-4 font-semibold text-base-content">Amount</th>
+                  <th className="text-left py-3 px-4 font-semibold text-base-content">Date</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-slate-600">
+              <tbody className="divide-y divide-base-200">
                 {payments.slice(0, 5).map((payment) => (
-                  <tr key={payment._id} className="hover:bg-gray-50 dark:hover:bg-slate-700">
-                    <td className="py-3 px-4 text-gray-700 dark:text-gray-300">{payment.user?.name || payment.user?.email}</td>
-                    <td className="py-3 px-4 text-gray-700 dark:text-gray-300 capitalize">{payment.purpose}</td>
-                    <td className="py-3 px-4 text-gray-700 dark:text-gray-300 font-medium">৳{payment.amount}</td>
-                    <td className="py-3 px-4 text-gray-500 dark:text-gray-400">
+                  <tr key={payment._id} className="hover:bg-base-200 transition-colors">
+                    <td className="py-3 px-4 text-base-content/80">{payment.user?.name || payment.user?.email}</td>
+                    <td className="py-3 px-4 text-base-content/80 capitalize">{payment.purpose}</td>
+                    <td className="py-3 px-4 text-base-content font-medium">৳{payment.amount}</td>
+                    <td className="py-3 px-4 text-base-content/50">
                       {payment.createdAt &&
                         format(new Date(payment.createdAt), "MMM dd, yyyy")}
                     </td>

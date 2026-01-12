@@ -52,7 +52,7 @@ const PaymentsPage = () => {
   };
 
   if (dataLoading) {
-    return <div className="text-center py-8">Loading...</div>;
+    return <div className="text-center py-8 text-base-content/60">Loading...</div>;
   }
 
   return (
@@ -62,15 +62,15 @@ const PaymentsPage = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Payments</h1>
-        <p className="text-gray-600 dark:text-gray-300 mt-1">View all payment transactions</p>
+        <h1 className="text-3xl font-bold text-base-content">Payments</h1>
+        <p className="text-base-content/60 mt-1">View all payment transactions</p>
       </div>
 
       {/* Total Revenue Card */}
-      <div className="bg-linear-to-r from-green-500 to-green-600 rounded-2xl shadow-md p-6 mb-6 text-white border border-green-400/20">
-        <h2 className="text-lg font-medium">Total Revenue</h2>
+      <div className="bg-success text-white rounded-2xl shadow-md p-6 mb-6 border border-success/20">
+        <h2 className="text-lg font-medium opacity-90">Total Revenue</h2>
         <p className="text-4xl font-bold mt-2">৳{totalRevenue}</p>
-        <p className="text-green-100 mt-1">
+        <p className="mt-1 opacity-80">
           From {payments.length} transactions
         </p>
       </div>
@@ -81,9 +81,9 @@ const PaymentsPage = () => {
           <button
             key={type}
             onClick={() => setFilter(type)}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${filter === type
-              ? "bg-[#137fec] text-white"
-              : "bg-white text-gray-700 hover:bg-gray-100"
+            className={`px-4 py-2 rounded-lg font-medium transition-all ${filter === type
+              ? "bg-primary text-primary-content shadow-lg shadow-primary/20"
+              : "bg-base-100 text-base-content/70 border border-base-300 hover:bg-base-200"
               }`}
           >
             {type.charAt(0).toUpperCase() + type.slice(1)}
@@ -93,51 +93,51 @@ const PaymentsPage = () => {
 
       {/* Payments Table */}
       {payments.length === 0 ? (
-        <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 text-center border border-gray-200 dark:border-slate-700 shadow-sm">
-          <p className="text-gray-500 dark:text-gray-400">No payments found</p>
+        <div className="bg-base-100 rounded-2xl p-8 text-center border border-base-200 shadow-sm">
+          <p className="text-base-content/40">No payments found</p>
         </div>
       ) : (
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 shadow-sm overflow-hidden">
+        <div className="bg-base-100 rounded-2xl border border-base-200 shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="border-b border-gray-200 dark:border-slate-600">
+              <thead className="border-b border-base-200 bg-base-200/50">
                 <tr>
-                  <th className="text-left py-4 px-6 font-semibold text-gray-900 dark:text-white">User</th>
-                  <th className="text-left py-4 px-6 font-semibold text-gray-900 dark:text-white">Amount</th>
-                  <th className="text-left py-4 px-6 font-semibold text-gray-900 dark:text-white">Purpose</th>
-                  <th className="text-left py-4 px-6 font-semibold text-gray-900 dark:text-white">Date</th>
-                  <th className="text-left py-4 px-6 font-semibold text-gray-900 dark:text-white">Status</th>
-                  <th className="text-left py-4 px-6 font-semibold text-gray-900 dark:text-white">Actions</th>
+                  <th className="text-left py-4 px-6 font-semibold text-base-content">User</th>
+                  <th className="text-left py-4 px-6 font-semibold text-base-content">Amount</th>
+                  <th className="text-left py-4 px-6 font-semibold text-base-content">Purpose</th>
+                  <th className="text-left py-4 px-6 font-semibold text-base-content">Date</th>
+                  <th className="text-left py-4 px-6 font-semibold text-base-content">Status</th>
+                  <th className="text-left py-4 px-6 font-semibold text-base-content">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-slate-600">
+              <tbody className="divide-y divide-base-200">
                 {payments.map((payment) => (
-                  <tr key={payment._id} className="hover:bg-gray-50 dark:hover:bg-slate-700">
+                  <tr key={payment._id} className="hover:bg-base-200 transition-colors">
                     <td className="py-4 px-6">
-                      <div className="font-medium text-gray-900 dark:text-white mb-1">
+                      <div className="font-medium text-base-content mb-1">
                         {payment.userId?.name || "Unknown"}
                       </div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">
+                      <div className="text-sm text-base-content/50">
                         {payment.userId?.email}
                       </div>
                     </td>
                     <td className="py-4 px-6">
-                      <div className="font-semibold text-gray-900 dark:text-white">
+                      <div className="font-semibold text-base-content">
                         ৳{payment.amount}
                       </div>
                     </td>
                     <td className="py-4 px-6">
                       <span
                         className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${payment.purpose === "premium"
-                          ? "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300"
-                          : "bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300"
+                          ? "bg-warning/20 text-warning-content"
+                          : "bg-info/20 text-info"
                           }`}
                       >
                         {payment.purpose?.charAt(0).toUpperCase() +
                           payment.purpose?.slice(1)}
                       </span>
                     </td>
-                    <td className="py-4 px-6 text-gray-500 dark:text-gray-400">
+                    <td className="py-4 px-6 text-base-content/50">
                       {payment.createdAt &&
                         format(
                           new Date(payment.createdAt),
@@ -145,14 +145,14 @@ const PaymentsPage = () => {
                         )}
                     </td>
                     <td className="py-4 px-6">
-                      <span className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300">
+                      <span className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-success/20 text-success">
                         {payment.status || "Completed"}
                       </span>
                     </td>
                     <td className="py-4 px-6">
                       <button
                         onClick={() => handleDownloadInvoice(payment._id)}
-                        className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1"
+                        className="text-info hover:underline inline-flex items-center gap-1"
                       >
                         <FiDownload className="text-sm" /> Invoice
                       </button>

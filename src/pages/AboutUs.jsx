@@ -4,17 +4,17 @@ import { MdInfo, MdGroup, MdTimeline, MdVerifiedUser } from "react-icons/md";
 
 const AboutUs = () => {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
+    <div className="min-h-screen bg-base-200/50">
       <main className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-4">
+          <h1 className="text-4xl sm:text-5xl font-black text-base-content mb-4">
             About CityFix
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl text-base-content/60 max-w-3xl mx-auto">
             Our mission is to bridge the gap between citizens and local
             authorities, creating a more transparent and efficient way to
             maintain our urban infrastructure.
@@ -27,10 +27,10 @@ const AboutUs = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+            <h2 className="text-3xl font-bold text-base-content mb-6">
               Our Vision
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6">
+            <p className="text-base-content/70 text-lg leading-relaxed mb-6">
               We imagine a world where every citizen is an active guardian of
               their city. By providing a seamless platform for reporting issues,
               we empower individuals to take ownership of their surroundings and
@@ -41,7 +41,7 @@ const AboutUs = () => {
                 <div className="mt-1 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                   <MdVerifiedUser />
                 </div>
-                <p className="text-gray-600 dark:text-gray-400 font-medium">
+                <p className="text-base-content/80 font-medium">
                   Verified transparency in issue resolution
                 </p>
               </div>
@@ -49,7 +49,7 @@ const AboutUs = () => {
                 <div className="mt-1 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                   <MdTimeline />
                 </div>
-                <p className="text-gray-600 dark:text-gray-400 font-medium">
+                <p className="text-base-content/80 font-medium">
                   Real-time progress tracking for every report
                 </p>
               </div>
@@ -70,38 +70,38 @@ const AboutUs = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-          <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700">
-            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center text-blue-600 mb-6">
+          <div className="bg-base-100 p-8 rounded-2xl shadow-sm border border-base-200">
+            <div className="w-12 h-12 bg-info/10 rounded-xl flex items-center justify-center text-info mb-6">
               <MdGroup className="text-2xl" />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+            <h3 className="text-xl font-bold text-base-content mb-3">
               Community Driven
             </h3>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-base-content/60">
               Built for the people, by people who care about their local
               infrastructure.
             </p>
           </div>
-          <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700">
-            <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center text-green-600 mb-6">
+          <div className="bg-base-100 p-8 rounded-2xl shadow-sm border border-base-200">
+            <div className="w-12 h-12 bg-success/10 rounded-xl flex items-center justify-center text-success mb-6">
               <MdTimeline className="text-2xl" />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+            <h3 className="text-xl font-bold text-base-content mb-3">
               Efficient Workflow
             </h3>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-base-content/60">
               Streamlined process from reporting to staff assignment and final
               fix.
             </p>
           </div>
-          <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700">
-            <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center text-purple-600 mb-6">
+          <div className="bg-base-100 p-8 rounded-2xl shadow-sm border border-base-200">
+            <div className="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary mb-6">
               <MdInfo className="text-2xl" />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+            <h3 className="text-xl font-bold text-base-content mb-3">
               Always Improving
             </h3>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-base-content/60">
               We constantly update our platform based on citizen and staff
               feedback.
             </p>

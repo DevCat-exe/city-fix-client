@@ -139,7 +139,7 @@ const CitizenOverview = () => {
   if (error) {
     return (
       <div className="text-center py-12">
-        <p className="text-red-600">Error: {error}</p>
+        <p className="text-error">Error: {error}</p>
       </div>
     );
   }
@@ -151,10 +151,10 @@ const CitizenOverview = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+        <h1 className="text-3xl font-bold text-base-content">
           Welcome, {dbUser?.name}!
         </h1>
-        <p className="text-gray-600 dark:text-gray-300 mt-1">
+        <p className="text-base-content/60 mt-1">
           Here's an overview of your reported issues
         </p>
       </div>
@@ -188,12 +188,12 @@ const CitizenOverview = () => {
       </div>
 
       {/* Payment Summary */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+      <div className="bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm mb-8">
+        <h2 className="text-xl font-semibold text-base-content mb-2">
           Payment Summary
         </h2>
         <p className="text-3xl font-bold text-primary">৳{totalPayments}</p>
-        <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+        <p className="text-sm text-base-content/60 mt-1">
           Total spent on boosts and premium
         </p>
         {payments.length > 0 && (
@@ -203,16 +203,16 @@ const CitizenOverview = () => {
                 key={payment._id}
                 className="flex justify-between items-center text-sm"
               >
-                <span className="text-gray-700 dark:text-gray-300 capitalize">
+                <span className="text-base-content/80 capitalize">
                   {payment.purpose}
                 </span>
-                <span className="font-medium text-gray-900 dark:text-white">
+                <span className="font-medium text-base-content">
                   ৳{payment.amount}
                 </span>
               </div>
             ))}
             {payments.length > 3 && (
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+              <p className="text-xs text-base-content/40 mt-2">
                 +{payments.length - 3} more payments
               </p>
             )}
@@ -224,8 +224,8 @@ const CitizenOverview = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Status Distribution */}
         {statusData.length > 0 && (
-          <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+          <div className="bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm">
+            <h2 className="text-xl font-semibold text-base-content mb-4">
               Status Distribution
             </h2>
             <ResponsiveContainer width="100%" height={300}>
@@ -244,7 +244,9 @@ const CitizenOverview = () => {
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip 
+                  contentStyle={{ backgroundColor: 'var(--color-base-100)', borderColor: 'var(--color-base-300)', color: 'var(--color-base-content)' }}
+                />
               </PieChart>
             </ResponsiveContainer>
           </div>
@@ -252,8 +254,8 @@ const CitizenOverview = () => {
 
         {/* Issues by Category */}
         {categoryData.length > 0 && (
-          <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+          <div className="bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm">
+            <h2 className="text-xl font-semibold text-base-content mb-4">
               Issues by Category
             </h2>
             <ResponsiveContainer width="100%" height={300}>
@@ -261,7 +263,9 @@ const CitizenOverview = () => {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
-                <Tooltip />
+                <Tooltip 
+                  contentStyle={{ backgroundColor: 'var(--color-base-100)', borderColor: 'var(--color-base-300)', color: 'var(--color-base-content)' }}
+                />
                 <Legend />
                 <Bar dataKey="count" fill="#137fec" />
               </BarChart>
@@ -271,12 +275,12 @@ const CitizenOverview = () => {
       </div>
 
       {/* Recent Issues */}
-      <div className="mt-8 bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+      <div className="mt-8 bg-base-100 rounded-2xl p-6 border border-base-200 shadow-sm">
+        <h2 className="text-xl font-semibold text-base-content mb-4">
           Recent Issues
         </h2>
         {issues.length === 0 ? (
-          <p className="text-gray-500 dark:text-gray-400">
+          <p className="text-base-content/40">
             No issues reported yet
           </p>
         ) : (
@@ -284,23 +288,23 @@ const CitizenOverview = () => {
             {issues.slice(0, 5).map((issue) => (
               <div
                 key={issue._id}
-                className="flex items-center justify-between p-4 bg-gray-50 dark:bg-slate-700 rounded-xl border border-gray-100 dark:border-slate-600"
+                className="flex items-center justify-between p-4 bg-base-200 rounded-xl border border-base-300"
               >
                 <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
+                  <h3 className="font-semibold text-base-content mb-1">
                     {issue.title}
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                  <p className="text-sm text-base-content/60">
                     {issue.category}
                   </p>
                 </div>
                 <span
                   className={`px-3 py-1 rounded-full text-xs font-semibold ${
                     issue.status === "resolved"
-                      ? "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300"
+                      ? "bg-success/20 text-success"
                       : issue.status === "pending"
-                      ? "bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300"
-                      : "bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300"
+                      ? "bg-warning/20 text-warning"
+                      : "bg-info/20 text-info"
                   }`}
                 >
                   {issue.status}

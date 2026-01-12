@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { MdCheckCircle, MdError, MdWarning, MdInfo } from "react-icons/md";
+import { MdCheckCircle, MdError, MdWarning, MdInfo, MdClose } from "react-icons/md";
 
 const Alert = ({
   type = "info",
@@ -12,32 +12,32 @@ const Alert = ({
   const getTypeStyles = () => {
     const types = {
       success: {
-        bg: "bg-green-50 dark:bg-green-900/20",
-        border: "border-green-200 dark:border-green-800",
-        text: "text-green-800 dark:text-green-200",
+        bg: "bg-success/10",
+        border: "border-success/20",
+        text: "text-success-content",
         icon: MdCheckCircle,
-        iconColor: "text-green-600 dark:text-green-400",
+        iconColor: "text-success",
       },
       error: {
-        bg: "bg-red-50 dark:bg-red-900/20",
-        border: "border-red-200 dark:border-red-800",
-        text: "text-red-800 dark:text-red-200",
+        bg: "bg-error/10",
+        border: "border-error/20",
+        text: "text-error-content",
         icon: MdError,
-        iconColor: "text-red-600 dark:text-red-400",
+        iconColor: "text-error",
       },
       warning: {
-        bg: "bg-yellow-50 dark:bg-yellow-900/20",
-        border: "border-yellow-200 dark:border-yellow-800",
-        text: "text-yellow-800 dark:text-yellow-200",
+        bg: "bg-warning/10",
+        border: "border-warning/20",
+        text: "text-warning-content",
         icon: MdWarning,
-        iconColor: "text-yellow-600 dark:text-yellow-400",
+        iconColor: "text-warning",
       },
       info: {
-        bg: "bg-blue-50 dark:bg-blue-900/20",
-        border: "border-blue-200 dark:border-blue-800",
-        text: "text-blue-800 dark:text-blue-200",
+        bg: "bg-info/10",
+        border: "border-info/20",
+        text: "text-info-content",
         icon: MdInfo,
-        iconColor: "text-blue-600 dark:text-blue-400",
+        iconColor: "text-info",
       },
     };
 
@@ -71,7 +71,7 @@ const Alert = ({
           onClick={onDismiss}
           className={`flex-shrink-0 p-1 rounded-lg ${styles.text} hover:opacity-70 transition-opacity`}
         >
-          ×
+          <MdClose />
         </button>
       )}
     </motion.div>
@@ -107,7 +107,7 @@ const LoadingSpinner = ({ size = "md", text = "Loading..." }) => {
         className={`animate-spin rounded-full border-2 border-primary border-t-transparent ${sizeClasses[size]}`}
       />
       {text && (
-        <span className="text-gray-600 dark:text-gray-400">
+        <span className="text-base-content/60">
           {text}
         </span>
       )}
@@ -130,22 +130,22 @@ const ProgressBar = ({
 
   const colorClasses = {
     primary: "bg-primary",
-    green: "bg-green-500",
-    yellow: "bg-yellow-500",
-    red: "bg-red-500",
+    green: "bg-success",
+    yellow: "bg-warning",
+    red: "bg-error",
   };
 
   return (
     <div className={`w-full ${className}`}>
       {showPercentage && (
-        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-1">
+        <div className="flex justify-between text-sm text-base-content/60 mb-1">
           <span>Progress</span>
           <span>{Math.round(progress)}%</span>
         </div>
       )}
-      <div className={`w-full rounded-full bg-gray-200 dark:bg-gray-700 ${sizeClasses[size]}`}>
+      <div className={`w-full rounded-full bg-base-200 overflow-hidden ${sizeClasses[size]}`}>
         <div
-          className={`rounded-full transition-all duration-300 ${colorClasses[color]} ${sizeClasses[size]}`}
+          className={`rounded-full transition-all duration-300 ${colorClasses[color] || "bg-primary"} ${sizeClasses[size]}`}
           style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
         />
       </div>
@@ -160,11 +160,11 @@ const Badge = ({
   className = "",
 }) => {
   const variantClasses = {
-    default: "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200",
-    primary: "bg-primary/10 text-primary dark:bg-primary/20",
-    success: "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-200",
-    warning: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-200",
-    error: "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-200",
+    default: "bg-base-200 text-base-content/70",
+    primary: "bg-primary/10 text-primary",
+    success: "bg-success/10 text-success",
+    warning: "bg-warning/10 text-warning",
+    error: "bg-error/10 text-error",
   };
 
   const sizeClasses = {

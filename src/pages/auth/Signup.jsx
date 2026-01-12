@@ -178,10 +178,10 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-gradient-page">
       <Navbar />
       <div className="flex flex-col md:flex-row min-h-[calc(100vh-64px)]">
-        <div className="relative hidden md:flex md:w-1/2 flex-col items-start justify-end p-12 bg-gradient-to-br from-primary via-blue-600 to-blue-700 text-white overflow-hidden">
+        <div className="relative hidden md:flex md:w-1/2 flex-col items-start justify-end p-12 bg-linear-to-br from-primary via-blue-600 to-blue-700 text-white overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img
               alt="City infrastructure"
@@ -220,49 +220,49 @@ const Signup = () => {
           </div>
         </div>
         <div className="flex w-full md:w-1/2 flex-col items-center justify-center p-4 sm:p-6 md:p-8">
-          <div className="w-full max-w-md bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-gray-200 dark:border-slate-700 p-6 sm:p-8">
+          <div className="w-full max-w-md bg-base-100 rounded-2xl shadow-xl border border-base-200 p-6 sm:p-8">
             <div className="pb-4">
-              <div className="flex bg-gray-100 dark:bg-slate-700 rounded-xl p-1 gap-1">
+              <div className="flex bg-base-200 rounded-xl p-1 gap-1">
                 <button
                   onClick={() => navigate("/login")}
-                  className="flex-1 flex items-center justify-center py-3 px-4 rounded-lg font-semibold text-sm transition-all text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                  className="flex-1 flex items-center justify-center py-3 px-4 rounded-lg font-semibold text-sm transition-all text-base-content/60 hover:text-base-content"
                 >
                   Login
                 </button>
-                <button className="flex-1 flex items-center justify-center py-3 px-4 rounded-lg font-semibold text-sm transition-all bg-white dark:bg-slate-600 text-primary dark:text-white shadow-md">
+                <button className="flex-1 flex items-center justify-center py-3 px-4 rounded-lg font-semibold text-sm transition-all bg-base-100 text-primary shadow-md">
                   Sign Up
                 </button>
               </div>
             </div>
             <div className="text-center mb-6">
-              <h1 className="text-3xl font-black text-gray-900 dark:text-white mb-2 tracking-tight">
+              <h1 className="text-3xl font-black text-base-content mb-2 tracking-tight">
                 Create Account
               </h1>
-              <p className="text-gray-500 dark:text-gray-400">
+              <p className="text-base-content/60">
                 Join thousands of active citizens
               </p>
             </div>
             <form onSubmit={handleSignup}>
               <div className="flex flex-col gap-4 py-3">
                 <label className="flex flex-col w-full">
-                  <p className="text-gray-900 dark:text-white text-base font-medium leading-normal pb-2">
+                  <p className="text-base-content font-medium pb-2">
                     Full Name
                   </p>
                   <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 h-14 placeholder:text-gray-500 dark:placeholder-slate-400 p-[15px] text-base font-normal leading-normal"
+                    className="w-full min-h-14 px-4 rounded-lg text-base-content focus:outline-none focus:ring-2 focus:ring-primary/50 border border-base-300 bg-base-200 placeholder:text-base-content/40 transition-all"
                     placeholder="Enter your full name"
                     required
                   />
                 </label>
                 <label className="flex flex-col w-full">
-                  <p className="text-gray-900 dark:text-white text-base font-medium leading-normal pb-2">
+                  <p className="text-base-content font-medium pb-2">
                     Profile Photo
                   </p>
                   <div className="flex items-center gap-4 py-2">
-                    <div className="relative w-20 h-20 rounded-xl bg-gray-100 dark:bg-slate-700 border-2 border-dashed border-gray-300 dark:border-slate-600 flex items-center justify-center overflow-hidden group">
+                    <div className="relative w-20 h-20 rounded-xl bg-base-200 border-2 border-dashed border-base-300 flex items-center justify-center overflow-hidden group">
                       {photoPreview ? (
                         <>
                           <img
@@ -276,7 +276,7 @@ const Signup = () => {
                               setPhoto(null);
                               setPhotoPreview("");
                             }}
-                            className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full p-1 opacity-100 transition-opacity z-10"
+                            className="absolute -top-1 -right-1 bg-error text-error-content rounded-full p-1 opacity-100 transition-opacity z-10"
                           >
                             <FiX className="text-sm" />
                           </button>
@@ -284,9 +284,9 @@ const Signup = () => {
                       ) : (
                         <label
                           htmlFor="photo-upload"
-                          className="cursor-pointer flex flex-col items-center justify-center w-full h-full hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors"
+                          className="cursor-pointer flex flex-col items-center justify-center w-full h-full hover:bg-base-300 transition-colors"
                         >
-                          <FiUpload className="text-gray-400 text-xl" />
+                          <FiUpload className="text-base-content/40 text-xl" />
                         </label>
                       )}
                     </div>
@@ -300,11 +300,11 @@ const Signup = () => {
                       />
                       <label
                         htmlFor="photo-upload"
-                        className="inline-flex px-4 py-2 bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-200 text-sm font-medium rounded-lg cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors"
+                        className="inline-flex px-4 py-2 bg-base-200 text-base-content/70 text-sm font-medium rounded-lg cursor-pointer hover:bg-base-300 transition-colors"
                       >
                         {photoPreview ? "Change Photo" : "Upload Photo"}
                       </label>
-                      <p className="text-xs text-gray-500 mt-1">
+                      <p className="text-xs text-base-content/50 mt-1">
                         Optional but recommended
                       </p>
                       {uploading && (
@@ -316,20 +316,20 @@ const Signup = () => {
                   </div>
                 </label>
                 <label className="flex flex-col w-full">
-                  <p className="text-gray-900 dark:text-white text-base font-medium leading-normal pb-2">
+                  <p className="text-base-content font-medium pb-2">
                     Email
                   </p>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 h-14 placeholder:text-gray-500 dark:placeholder-slate-400 p-[15px] text-base font-normal leading-normal"
+                    className="w-full min-h-14 px-4 rounded-lg text-base-content focus:outline-none focus:ring-2 focus:ring-primary/50 border border-base-300 bg-base-200 placeholder:text-base-content/40 transition-all"
                     placeholder="Enter your email"
                     required
                   />
                 </label>
                 <label className="flex flex-col w-full">
-                  <p className="text-gray-900 dark:text-white text-base font-medium leading-normal pb-2">
+                  <p className="text-base-content font-medium pb-2">
                     Password
                   </p>
                   <div className="relative flex w-full flex-1 items-stretch">
@@ -337,7 +337,7 @@ const Signup = () => {
                       type={showPassword ? "text" : "password"}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 h-14 placeholder:text-gray-500 dark:placeholder-slate-400 p-[15px] text-base font-normal leading-normal"
+                      className="w-full min-h-14 px-4 rounded-lg text-base-content focus:outline-none focus:ring-2 focus:ring-primary/50 border border-base-300 bg-base-200 placeholder:text-base-content/40 transition-all"
                       placeholder="Enter your password (min 6 characters)"
                       required
                       minLength={6}
@@ -345,14 +345,14 @@ const Signup = () => {
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-200"
+                      className="absolute inset-y-0 right-0 flex items-center pr-3 text-base-content/40 hover:text-base-content"
                     >
                       <MdVisibility className="text-xl" />
                     </button>
                   </div>
                 </label>
                 <label className="flex flex-col w-full">
-                  <p className="text-gray-900 dark:text-white text-base font-medium leading-normal pb-2">
+                  <p className="text-base-content font-medium pb-2">
                     Confirm Password
                   </p>
                   <div className="relative flex w-full flex-1 items-stretch">
@@ -360,7 +360,7 @@ const Signup = () => {
                       type={showConfirmPassword ? "text" : "password"}
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 h-14 placeholder:text-gray-500 dark:placeholder-slate-400 p-[15px] text-base font-normal leading-normal"
+                      className="w-full min-h-14 px-4 rounded-lg text-base-content focus:outline-none focus:ring-2 focus:ring-primary/50 border border-base-300 bg-base-200 placeholder:text-base-content/40 transition-all"
                       placeholder="Confirm your password"
                       required
                       minLength={6}
@@ -370,7 +370,7 @@ const Signup = () => {
                       onClick={() =>
                         setShowConfirmPassword(!showConfirmPassword)
                       }
-                      className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-200"
+                      className="absolute inset-y-0 right-0 flex items-center pr-3 text-base-content/40 hover:text-base-content"
                     >
                       <MdVisibility className="text-xl" />
                     </button>
@@ -381,7 +381,7 @@ const Signup = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="flex items-center justify-center gap-2 w-full h-14 px-4 rounded-xl bg-gradient-to-r from-primary to-blue-600 text-white text-base font-bold hover:from-primary/90 hover:to-blue-600/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-slate-800 disabled:opacity-50 transition-all shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30"
+                  className="flex items-center justify-center gap-2 w-full h-14 px-4 rounded-xl bg-linear-to-r from-primary to-blue-600 text-white text-base font-bold hover:from-primary/90 hover:to-blue-600/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 transition-all shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30"
                 >
                   {loading ? (
                     <>
@@ -397,10 +397,10 @@ const Signup = () => {
                 </button>
                 <div className="relative">
                   <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-300 dark:border-slate-600"></div>
+                    <div className="w-full border-t border-base-300"></div>
                   </div>
                   <div className="relative flex justify-center text-sm">
-                    <span className="px-4 bg-white dark:bg-slate-800 text-gray-500 dark:text-gray-400">
+                    <span className="px-4 bg-base-100 text-base-content/50">
                       Or continue with
                     </span>
                   </div>
@@ -409,14 +409,14 @@ const Signup = () => {
                   type="button"
                   onClick={handleGoogleSignup}
                   disabled={loading}
-                  className="flex items-center justify-center gap-3 w-full h-14 px-4 rounded-xl bg-white dark:bg-slate-700 text-gray-700 dark:text-slate-200 border-2 border-gray-300 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 dark:focus:ring-offset-slate-800 disabled:opacity-50 transition-all font-semibold"
+                  className="flex items-center justify-center gap-3 w-full h-14 px-4 rounded-xl bg-base-100 text-base-content/70 border-2 border-base-300 hover:bg-base-200 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all font-semibold"
                 >
                   <FcGoogle className="w-6 h-6" />
                   <span>Continue with Google</span>
                 </button>
               </div>
               <div className="pt-6 text-center">
-                <p className="text-sm text-gray-600 dark:text-slate-400">
+                <p className="text-sm text-base-content/60">
                   Already have an account?{" "}
                   <button
                     type="button"

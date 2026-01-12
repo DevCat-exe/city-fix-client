@@ -1,14 +1,24 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 
 const DashboardLayout = ({ children }) => {
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-gradient-page flex flex-col">
       <Navbar />
-      {/* Main Content */}
-      <main className="pt-16">
-        <div className="p-6">{children}</div>
-      </main>
+      <div className="flex flex-1">
+        {/* Sidebar - Visible on Desktop */}
+        <Sidebar />
+        
+        {/* Main Content */}
+        <div className="flex-1 min-w-0 p-4 sm:p-6 lg:p-8">
+          <div className="max-w-7xl mx-auto w-full">
+            <div className="bg-transparent">
+              {children}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

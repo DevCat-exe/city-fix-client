@@ -8,7 +8,7 @@ import {
 } from "../../../api/endpoints";
 import { useAuth } from "../../../hooks/useAuth";
 import { usePayment } from "../../../hooks/usePayment";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import toast from "react-hot-toast";
 import { FiAward, FiDownload } from "react-icons/fi";
 import { format } from "date-fns";
@@ -97,10 +97,10 @@ const CitizenProfile = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+        <h1 className="text-3xl font-bold text-base-content">
           Profile
         </h1>
-        <p className="text-gray-600 dark:text-gray-300 mt-1">
+        <p className="text-base-content/60 mt-1">
           Manage your account information
         </p>
       </div>
@@ -109,16 +109,16 @@ const CitizenProfile = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Profile Info */}
-        <div className="lg:col-span-2 bg-white dark:bg-slate-800 rounded-2xl shadow-sm p-6 border border-gray-200 dark:border-slate-700">
+        <div className="lg:col-span-2 bg-base-100 rounded-2xl shadow-sm p-6 border border-base-200">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+            <h2 className="text-xl font-semibold text-base-content">
               Account Information
             </h2>
             {!editing && (
               <button
                 onClick={() => setEditing(true)}
                 disabled={dbUser?.isBlocked}
-                className="px-4 py-2 text-[#137fec] hover:bg-blue-50 rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 text-primary hover:bg-primary/10 rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 Edit Profile
               </button>
@@ -128,7 +128,7 @@ const CitizenProfile = () => {
           {editing ? (
             <form onSubmit={handleUpdate} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-base-content/80 mb-1">
                   Name
                 </label>
                 <input
@@ -136,12 +136,12 @@ const CitizenProfile = () => {
                   name="name"
                   defaultValue={dbUser?.name}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                  className="w-full px-4 py-2 border border-base-300 rounded-lg focus:ring-2 focus:ring-primary bg-base-100 text-base-content"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-base-content/80 mb-1">
                   Profile Photo
                 </label>
                 <input
@@ -149,10 +149,10 @@ const CitizenProfile = () => {
                   accept="image/*"
                   onChange={handleImageUpload}
                   disabled={uploading}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white file:bg-gray-50 dark:file:bg-slate-600 file:border-0 file:rounded-md file:px-3 file:py-1 file:mr-3 file:text-gray-700 dark:file:text-gray-300"
+                  className="w-full px-4 py-2 border border-base-300 rounded-lg bg-base-100 text-base-content file:bg-base-200 file:text-base-content file:border-0 file:rounded-md file:px-3 file:py-1 file:mr-3 file:font-medium"
                 />
                 {uploading && (
-                  <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                  <p className="text-sm text-primary mt-1 animate-pulse">
                     Uploading...
                   </p>
                 )}
@@ -162,14 +162,14 @@ const CitizenProfile = () => {
                 <button
                   type="submit"
                   disabled={updateMutation.isPending}
-                  className="px-6 py-2 bg-[#137fec] text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
+                  className="px-6 py-2 bg-primary text-primary-content rounded-lg hover:bg-primary/90 disabled:opacity-50 transition-all"
                 >
                   Save Changes
                 </button>
                 <button
                   type="button"
                   onClick={() => setEditing(false)}
-                  className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+                  className="px-6 py-2 bg-base-300 text-base-content rounded-lg hover:bg-base-200 transition-colors"
                 >
                   Cancel
                 </button>
@@ -182,37 +182,37 @@ const CitizenProfile = () => {
                   <img
                     src={dbUser.photoURL}
                     alt={dbUser.name}
-                    className="w-20 h-20 rounded-full object-cover"
+                    className="w-20 h-20 rounded-full object-cover border-2 border-base-300"
                   />
                 ) : (
-                  <div className="w-20 h-20 rounded-full bg-[#137fec] flex items-center justify-center text-white text-2xl font-bold">
+                  <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center text-primary-content text-2xl font-bold shadow-sm">
                     {dbUser?.name?.charAt(0)?.toUpperCase()}
                   </div>
                 )}
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                  <h3 className="text-2xl font-bold text-base-content">
                     {dbUser?.name}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300">
+                  <p className="text-base-content/60">
                     {dbUser?.email}
                   </p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-base-content/50">
                     Account Type
                   </p>
-                  <p className="font-medium text-gray-900 dark:text-white capitalize">
+                  <p className="font-medium text-base-content capitalize">
                     {dbUser?.role}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-base-content/50">
                     Member Since
                   </p>
-                  <p className="font-medium text-gray-900 dark:text-white">
+                  <p className="font-medium text-base-content">
                     {dbUser?.createdAt &&
                       format(new Date(dbUser.createdAt), "MMM dd, yyyy")}
                   </p>
@@ -223,25 +223,25 @@ const CitizenProfile = () => {
         </div>
 
         {/* Premium Subscription */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-200 dark:border-slate-700 overflow-hidden flex flex-col">
+        <div className="bg-base-100 rounded-2xl shadow-sm border border-base-200 overflow-hidden flex flex-col">
           <div className="p-6 text-center flex-1 flex flex-col items-center justify-center">
             <div
               className={`inline-flex items-center justify-center w-20 h-20 rounded-full mb-6 ${
                 dbUser?.isPremium
-                  ? "bg-gradient-to-br from-yellow-100 to-amber-100 dark:from-yellow-900/40 dark:to-amber-900/40 shadow-inner"
-                  : "bg-gray-100 dark:bg-slate-700"
+                  ? "bg-gradient-to-br from-yellow-100 to-amber-100 dark:from-amber-900/40 dark:to-yellow-900/40 shadow-inner"
+                  : "bg-base-300"
               }`}
             >
               <FiAward
                 className={`text-4xl ${
                   dbUser?.isPremium
-                    ? "text-amber-500 dark:text-amber-400"
-                    : "text-gray-400 dark:text-gray-500"
+                    ? "text-amber-700 dark:text-amber-400"
+                    : "text-base-content/20"
                 }`}
               />
             </div>
 
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            <h3 className="text-2xl font-bold text-base-content mb-2">
               {dbUser?.isPremium
                 ? "Premium Membership Active"
                 : "Upgrade to Premium"}
@@ -249,11 +249,11 @@ const CitizenProfile = () => {
 
             {dbUser?.isPremium ? (
               <div className="mt-4 w-full">
-                <div className="inline-block px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full font-semibold text-sm mb-6">
+                <div className="inline-block px-4 py-2 bg-success/10 text-black dark:text-success border border-success/20 rounded-full font-semibold text-sm mb-6">
                   ✓ Active Plan
                 </div>
-                <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-5 text-left">
-                  <h4 className="font-semibold text-gray-900 dark:text-white mb-3 text-sm uppercase tracking-wider">
+                <div className="bg-base-200/50 rounded-xl p-5 text-left">
+                  <h4 className="font-semibold text-base-content mb-3 text-sm uppercase tracking-wider">
                     Your Benefits
                   </h4>
                   <ul className="space-y-3">
@@ -265,9 +265,9 @@ const CitizenProfile = () => {
                     ].map((feature, i) => (
                       <li
                         key={i}
-                        className="flex items-start gap-3 text-sm text-gray-800 dark:text-gray-200"
+                        className="flex items-start gap-3 text-sm text-base-content/80"
                       >
-                        <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center text-xs">
+                        <span className="flex-shrink-0 w-5 h-5 rounded-full bg-success/10 text-success flex items-center justify-center text-xs">
                           ✓
                         </span>
                         {feature}
@@ -278,21 +278,21 @@ const CitizenProfile = () => {
               </div>
             ) : (
               <div className="w-full">
-                <p className="text-gray-800 dark:text-gray-200 mb-6 max-w-xs mx-auto font-medium">
+                <p className="text-base-content/70 mb-6 max-w-xs mx-auto font-medium">
                   Get unlimited issue reporting and priority support for a
                   better city experience.
                 </p>
 
-                <div className="bg-gradient-to-br from-[#137fec]/5 to-blue-50 dark:from-[#137fec]/10 dark:to-slate-700/50 rounded-2xl p-6 mb-6 border border-blue-100 dark:border-blue-900/30">
+                <div className="bg-primary/5 rounded-2xl p-6 mb-6 border border-primary/10">
                   <div className="flex items-end justify-center gap-1 mb-1">
-                    <span className="text-4xl font-black text-[#137fec] tracking-tight">
+                    <span className="text-4xl font-black text-primary tracking-tight">
                       ৳1000
                     </span>
-                    <span className="text-gray-600 dark:text-gray-300 font-medium mb-1.5">
+                    <span className="text-base-content/50 font-medium mb-1.5">
                       / lifetime
                     </span>
                   </div>
-                  <p className="text-xs text-center text-gray-600 dark:text-gray-300 font-medium uppercase tracking-wide">
+                  <p className="text-xs text-center text-base-content/40 font-medium uppercase tracking-wide">
                     One-time payment
                   </p>
                 </div>
@@ -300,7 +300,7 @@ const CitizenProfile = () => {
                 <button
                   onClick={handleSubscribe}
                   disabled={paymentLoading || dbUser?.isBlocked}
-                  className="w-full py-4 bg-gradient-to-r from-[#137fec] to-blue-600 text-white rounded-xl hover:shadow-lg hover:shadow-blue-500/30 font-bold text-lg transition-all transform active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="w-full py-4 bg-linear-to-r from-primary to-blue-600 text-white rounded-xl hover:shadow-lg hover:shadow-primary/30 font-bold text-lg transition-all transform active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {dbUser?.isBlocked
                     ? "Account Restricted"
@@ -310,7 +310,7 @@ const CitizenProfile = () => {
                 </button>
 
                 <div className="mt-8">
-                  <h4 className="font-medium text-gray-900 dark:text-white mb-4 text-sm text-left px-1">
+                  <h4 className="font-medium text-base-content mb-4 text-sm text-left px-1">
                     Included in Premium:
                   </h4>
                   <ul className="space-y-3 text-left">
@@ -321,9 +321,9 @@ const CitizenProfile = () => {
                     ].map((feature, i) => (
                       <li
                         key={i}
-                        className="flex items-center gap-3 text-sm text-gray-800 dark:text-gray-200 font-medium"
+                        className="flex items-center gap-3 text-sm text-base-content/80 font-medium"
                       >
-                        <div className="w-5 h-5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center flex-shrink-0 text-xs shadow-sm">
+                        <div className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 text-xs shadow-sm">
                           ✓
                         </div>
                         {feature}
@@ -338,58 +338,58 @@ const CitizenProfile = () => {
       </div>
 
       {/* Payment History */}
-      <div className="mt-6 bg-white dark:bg-slate-800 rounded-2xl shadow-sm p-6 border border-gray-200 dark:border-slate-700">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+      <div className="mt-6 bg-base-100 rounded-2xl shadow-sm p-6 border border-base-200">
+        <h2 className="text-xl font-semibold text-base-content mb-4">
           Payment History
         </h2>
         {payments.length === 0 ? (
-          <p className="text-gray-500 dark:text-gray-400">No payments yet</p>
+          <p className="text-base-content/40">No payments yet</p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="border-b border-gray-200 dark:border-slate-600">
+              <thead className="border-b border-base-200 bg-base-200/50">
                 <tr>
-                  <th className="text-left py-4 px-6 font-semibold text-gray-900 dark:text-white">
+                  <th className="text-left py-4 px-6 font-semibold text-base-content">
                     Date
                   </th>
-                  <th className="text-left py-4 px-6 font-semibold text-gray-900 dark:text-white">
+                  <th className="text-left py-4 px-6 font-semibold text-base-content">
                     Purpose
                   </th>
-                  <th className="text-left py-4 px-6 font-semibold text-gray-900 dark:text-white">
+                  <th className="text-left py-4 px-6 font-semibold text-base-content">
                     Amount
                   </th>
-                  <th className="text-left py-4 px-6 font-semibold text-gray-900 dark:text-white">
+                  <th className="text-left py-4 px-6 font-semibold text-base-content">
                     Status
                   </th>
-                  <th className="text-left py-4 px-6 font-semibold text-gray-900 dark:text-white">
+                  <th className="text-left py-4 px-6 font-semibold text-base-content">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-slate-600">
+              <tbody className="divide-y divide-base-200">
                 {payments.map((payment) => (
                   <tr
                     key={payment._id}
-                    className="hover:bg-gray-50 dark:hover:bg-slate-700"
+                    className="hover:bg-base-200 transition-colors"
                   >
-                    <td className="py-4 px-6 text-gray-700 dark:text-gray-300">
+                    <td className="py-4 px-6 text-base-content/80">
                       {format(new Date(payment.createdAt), "MMM dd, yyyy")}
                     </td>
-                    <td className="py-4 px-6 text-gray-700 dark:text-gray-300 capitalize">
+                    <td className="py-4 px-6 text-base-content/80 capitalize">
                       {payment.purpose}
                     </td>
-                    <td className="py-4 px-6 text-gray-700 dark:text-gray-300 font-medium">
+                    <td className="py-4 px-6 text-base-content font-medium">
                       ৳{payment.amount}
                     </td>
                     <td className="py-4 px-6">
-                      <span className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300">
+                      <span className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-success/10 text-success border border-success/20">
                         {payment.status || "Completed"}
                       </span>
                     </td>
                     <td className="py-4 px-6">
                       <button
                         onClick={() => handleDownloadInvoice(payment._id)}
-                        className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1"
+                        className="text-info hover:underline inline-flex items-center gap-1"
                       >
                         <FiDownload className="text-sm" /> Invoice
                       </button>

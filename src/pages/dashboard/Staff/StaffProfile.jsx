@@ -36,7 +36,6 @@ const StaffProfile = () => {
 
       updateMutation.mutate({ photoURL: imageUrl });
     } catch {
-      ``;
       toast.error("Failed to upload image");
     } finally {
       setUploading(false);
@@ -58,23 +57,23 @@ const StaffProfile = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+        <h1 className="text-3xl font-bold text-base-content">
           Profile
         </h1>
-        <p className="text-gray-600 dark:text-gray-300 mt-1">
+        <p className="text-base-content/60 mt-1">
           Manage your staff account information
         </p>
       </div>
 
-      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm p-6 border border-gray-200 dark:border-slate-700">
+      <div className="bg-base-100 rounded-2xl shadow-sm p-6 border border-base-200">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+          <h2 className="text-xl font-semibold text-base-content">
             Account Information
           </h2>
           {!editing && (
             <button
               onClick={() => setEditing(true)}
-              className="px-4 py-2 text-[#137fec] hover:bg-blue-50 rounded-lg font-medium"
+              className="px-4 py-2 text-primary hover:bg-primary/10 rounded-lg font-medium transition-colors"
             >
               Edit Profile
             </button>
@@ -84,7 +83,7 @@ const StaffProfile = () => {
         {editing ? (
           <form onSubmit={handleUpdate} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-base-content/80 mb-1">
                 Name
               </label>
               <input
@@ -92,12 +91,12 @@ const StaffProfile = () => {
                 name="name"
                 defaultValue={dbUser?.name}
                 required
-                className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                className="w-full px-4 py-2 border border-base-300 rounded-lg focus:ring-2 focus:ring-primary bg-base-100 text-base-content"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-base-content/80 mb-1">
                 Profile Photo
               </label>
               <input
@@ -105,10 +104,10 @@ const StaffProfile = () => {
                 accept="image/*"
                 onChange={handleImageUpload}
                 disabled={uploading}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white file:bg-gray-50 dark:file:bg-slate-600 file:border-0 file:rounded-md file:px-3 file:py-1 file:mr-3 file:text-gray-700 dark:file:text-gray-300"
+                className="w-full px-4 py-2 border border-base-300 rounded-lg bg-base-100 text-base-content file:bg-base-200 file:text-base-content file:border-0 file:rounded-md file:px-3 file:py-1 file:mr-3 file:font-medium"
               />
               {uploading && (
-                <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                <p className="text-sm text-primary mt-1 animate-pulse">
                   Uploading...
                 </p>
               )}
@@ -118,14 +117,14 @@ const StaffProfile = () => {
               <button
                 type="submit"
                 disabled={updateMutation.isPending}
-                className="px-6 py-2 bg-[#137fec] text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
+                className="px-6 py-2 bg-primary text-primary-content rounded-lg hover:bg-primary/90 disabled:opacity-50 transition-all"
               >
                 Save Changes
               </button>
               <button
                 type="button"
                 onClick={() => setEditing(false)}
-                className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+                className="px-6 py-2 bg-base-300 text-base-content rounded-lg hover:bg-base-200 transition-colors"
               >
                 Cancel
               </button>
@@ -138,48 +137,48 @@ const StaffProfile = () => {
                 <img
                   src={dbUser.photoURL}
                   alt={dbUser.name}
-                  className="w-20 h-20 rounded-full object-cover"
+                  className="w-20 h-20 rounded-full object-cover border-2 border-base-300"
                 />
               ) : (
-                <div className="w-20 h-20 rounded-full bg-[#137fec] flex items-center justify-center text-white text-2xl font-bold">
+                <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center text-primary-content text-2xl font-bold shadow-sm">
                   {dbUser?.name?.charAt(0)?.toUpperCase()}
                 </div>
               )}
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                <h3 className="text-2xl font-bold text-base-content">
                   {dbUser?.name}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300">
+                <p className="text-base-content/60">
                   {dbUser?.email}
                 </p>
-                <span className="inline-block mt-1 px-3 py-1 text-xs font-semibold bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full">
+                <span className="inline-block mt-1 px-3 py-1 text-xs font-semibold bg-info/10 text-info border border-info/20 rounded-full">
                   Staff Member
                 </span>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Role</p>
-                <p className="font-medium text-gray-900 dark:text-white capitalize">
+                <p className="text-sm text-base-content/50">Role</p>
+                <p className="font-medium text-base-content capitalize">
                   {dbUser?.role}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-base-content/50">
                   Member Since
                 </p>
-                <p className="font-medium text-gray-900 dark:text-white">
+                <p className="font-medium text-base-content">
                   {dbUser?.createdAt &&
                     format(new Date(dbUser.createdAt), "MMM dd, yyyy")}
                 </p>
               </div>
               {dbUser?.phone && (
                 <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-base-content/50">
                     Phone
                   </p>
-                  <p className="font-medium text-gray-900 dark:text-white">
+                  <p className="font-medium text-base-content">
                     {dbUser.phone}
                   </p>
                 </div>
@@ -190,11 +189,11 @@ const StaffProfile = () => {
       </div>
 
       {/* Info Card */}
-      <div className="mt-6 bg-blue-50 dark:bg-blue-900/10 rounded-2xl p-6 border border-blue-200 dark:border-blue-800">
-        <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">
+      <div className="mt-6 bg-info/10 rounded-2xl p-6 border border-info/20">
+        <h3 className="text-lg font-semibold text-info mb-2">
           Staff Guidelines
         </h3>
-        <ul className="space-y-2 text-sm text-blue-800 dark:text-blue-200">
+        <ul className="space-y-2 text-sm text-base-content/70">
           <li>• Respond to assigned issues promptly</li>
           <li>• Keep status updates regular and detailed</li>
           <li>• Prioritize boosted issues for faster resolution</li>

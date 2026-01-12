@@ -103,17 +103,17 @@ const Guides = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800 py-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-page py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">
+          <h1 className="text-4xl sm:text-5xl font-black text-base-content mb-4 tracking-tight">
             How CityFix Works
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl text-base-content/60 max-w-3xl mx-auto">
             Everything you need to know about reporting, tracking, and resolving
             infrastructure issues in your city.
           </p>
@@ -127,47 +127,47 @@ const Guides = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-xl border border-gray-100 dark:border-slate-700 hover:shadow-2xl transition-all group"
+              className="bg-base-100 rounded-3xl p-8 shadow-xl border border-base-200 hover:shadow-2xl transition-all group"
             >
               <div
                 className={`w-16 h-16 rounded-2xl mb-8 flex items-center justify-center transition-transform group-hover:scale-110 duration-500
                 ${
                   section.color === "blue"
-                    ? "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
+                    ? "bg-info/10 text-info"
                     : ""
                 }
                 ${
                   section.color === "rose"
-                    ? "bg-rose-100 text-rose-600 dark:bg-rose-900/30 dark:text-rose-400"
+                    ? "bg-error/10 text-error"
                     : ""
                 }
                 ${
                   section.color === "teal"
-                    ? "bg-teal-100 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400"
+                    ? "bg-success/10 text-success"
                     : ""
                 }
                 ${
                   section.color === "amber"
-                    ? "bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400"
+                    ? "bg-warning/10 text-warning"
                     : ""
                 }
               `}
               >
                 {section.icon}
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight">
+              <h2 className="text-2xl font-bold text-base-content mb-6 tracking-tight">
                 {section.title}
               </h2>
               <div className="space-y-6">
                 {section.steps.map((step, sIdx) => (
                   <div key={sIdx} className="relative pl-8">
-                    <span className="absolute left-0 top-1 text-xs font-black text-primary/50 dark:text-primary/30">
+                    <span className="absolute left-0 top-1 text-xs font-black text-primary/50">
                       0{sIdx + 1}
                     </span>
-                    <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-2">
+                    <h3 className="text-lg font-bold text-base-content/90 mb-2">
                       {step.title}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                    <p className="text-base-content/60 text-sm leading-relaxed">
                       {step.description}
                     </p>
                   </div>
@@ -181,24 +181,24 @@ const Guides = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-20 bg-primary/5 dark:bg-primary/10 rounded-3xl p-8 sm:p-12 border border-primary/10 dark:border-primary/20 text-center"
+          className="mt-20 bg-primary/5 rounded-3xl p-8 sm:p-12 border border-primary/10 text-center"
         >
           <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center text-primary mx-auto mb-6">
             <MdLightbulbOutline className="text-3xl" />
           </div>
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-3xl font-bold text-base-content mb-4">
             Pro Tip: Be the Guardian of Your Block
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
+          <p className="text-lg text-base-content/60 max-w-2xl mx-auto mb-8">
             The most successful reports are those that include multiple photos
             from different angles and clear context about how the issue affects
             daily life in the community.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <div className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300">
+            <div className="flex items-center gap-2 px-4 py-2 bg-base-100 rounded-full shadow-sm text-sm font-medium text-base-content/70">
               <MdSecurity className="text-primary" /> Verified Safety
             </div>
-            <div className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300">
+            <div className="flex items-center gap-2 px-4 py-2 bg-base-100 rounded-full shadow-sm text-sm font-medium text-base-content/70">
               <MdInfo className="text-primary" /> Clear Context
             </div>
           </div>

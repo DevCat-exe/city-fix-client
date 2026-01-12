@@ -69,7 +69,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-page flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -79,23 +79,23 @@ const ForgotPassword = () => {
         {/* Back Button */}
         <Link
           to="/login"
-          className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary mb-8 transition-colors"
+          className="inline-flex items-center gap-2 text-base-content/60 hover:text-primary mb-8 transition-colors"
         >
           <MdArrowBack className="text-xl" />
           Back to Login
         </Link>
 
         {/* Main Card */}
-        <div className="rounded-2xl bg-white dark:bg-slate-800 shadow-xl border border-gray-200 dark:border-slate-700 p-8">
+        <div className="rounded-2xl bg-base-100 shadow-xl border border-base-200 p-8">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 dark:bg-primary/20 mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-4">
               <MdEmail className="text-3xl text-primary" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="text-2xl font-bold text-base-content mb-2">
               Forgot Password?
             </h1>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-base-content/60">
               No problem! Enter your email address and we'll send you a link to
               reset your password.
             </p>
@@ -149,18 +149,18 @@ const ForgotPassword = () => {
               transition={{ duration: 0.5 }}
               className="text-center py-8"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-green-100 dark:bg-green-900/20 mb-4">
-                <MdCheckCircle className="text-3xl text-green-600 dark:text-green-400" />
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-success/10 mb-4">
+                <MdCheckCircle className="text-3xl text-success" />
               </div>
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+              <h2 className="text-xl font-semibold text-base-content mb-2">
                 Check Your Email
               </h2>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
+              <p className="text-base-content/60 mb-4">
                 We've sent a password reset link to:
                 <br />
                 <span className="font-medium text-primary">{values.email}</span>
               </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-base-content/40">
                 Didn't receive the email? Check your spam folder or try again.
               </p>
             </motion.div>
@@ -168,9 +168,9 @@ const ForgotPassword = () => {
 
           {/* Additional Help */}
           {!emailSent && (
-            <div className="pt-6 border-t border-gray-200 dark:border-slate-700">
+            <div className="pt-6 border-t border-base-200">
               <div className="text-center space-y-2">
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-base-content/60">
                   Remember your password?
                 </p>
                 <Link
@@ -186,7 +186,7 @@ const ForgotPassword = () => {
 
         {/* Help Section */}
         <div className="mt-8 text-center">
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          <p className="text-sm text-base-content/60 mb-4">
             Still having trouble?
           </p>
           <div className="space-y-2">

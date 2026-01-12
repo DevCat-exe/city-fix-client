@@ -5,12 +5,12 @@ export const SkeletonCard = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="rounded-2xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+      className="rounded-2xl bg-base-100 border border-base-200 overflow-hidden shadow-sm"
     >
       {/* Image skeleton */}
-      <div className="h-48 bg-gray-200 dark:bg-gray-700 relative overflow-hidden">
+      <div className="h-48 bg-base-300 relative overflow-hidden">
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-base-content/5 to-transparent"
           animate={{
             x: ["-100%", "100%"],
           }}
@@ -25,9 +25,9 @@ export const SkeletonCard = () => {
       {/* Content skeleton */}
       <div className="p-6 space-y-4">
         {/* Title skeleton */}
-        <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded-lg relative overflow-hidden">
+        <div className="h-6 bg-base-300 rounded-lg relative overflow-hidden">
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-base-content/5 to-transparent"
             animate={{
               x: ["-100%", "100%"],
             }}
@@ -41,9 +41,9 @@ export const SkeletonCard = () => {
 
         {/* Description skeleton */}
         <div className="space-y-2">
-          <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded relative overflow-hidden">
+          <div className="h-4 bg-base-300 rounded relative overflow-hidden">
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-base-content/5 to-transparent"
               animate={{
                 x: ["-100%", "100%"],
               }}
@@ -55,9 +55,9 @@ export const SkeletonCard = () => {
               }}
             />
           </div>
-          <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 relative overflow-hidden">
+          <div className="h-4 bg-base-300 rounded w-3/4 relative overflow-hidden">
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-base-content/5 to-transparent"
               animate={{
                 x: ["-100%", "100%"],
               }}
@@ -72,10 +72,10 @@ export const SkeletonCard = () => {
         </div>
 
         {/* Meta info skeleton */}
-        <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
-          <div className="h-8 w-20 bg-gray-200 dark:bg-gray-700 rounded-full relative overflow-hidden">
+        <div className="flex items-center justify-between pt-4 border-t border-base-200">
+          <div className="h-8 w-20 bg-base-300 rounded-full relative overflow-hidden">
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-base-content/5 to-transparent"
               animate={{
                 x: ["-100%", "100%"],
               }}
@@ -87,9 +87,9 @@ export const SkeletonCard = () => {
               }}
             />
           </div>
-          <div className="h-8 w-24 bg-gray-200 dark:bg-gray-700 rounded-full relative overflow-hidden">
+          <div className="h-8 w-24 bg-base-300 rounded-full relative overflow-hidden">
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-base-content/5 to-transparent"
               animate={{
                 x: ["-100%", "100%"],
               }}
@@ -104,9 +104,9 @@ export const SkeletonCard = () => {
         </div>
 
         {/* Button skeleton */}
-        <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded-xl relative overflow-hidden">
+        <div className="h-10 bg-base-300 rounded-xl relative overflow-hidden">
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-base-content/5 to-transparent"
             animate={{
               x: ["-100%", "100%"],
             }}
@@ -156,10 +156,10 @@ export const TableSkeleton = ({ rows = 5, columns = 4 }) => {
         {Array.from({ length: columns }, (_, i) => (
           <div
             key={i}
-            className="h-8 bg-gray-200 dark:bg-gray-700 rounded-lg relative overflow-hidden"
+            className="h-8 bg-base-300 rounded-lg relative overflow-hidden"
           >
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-base-content/5 to-transparent"
               animate={{
                 x: ["-100%", "100%"],
               }}
@@ -184,10 +184,10 @@ export const TableSkeleton = ({ rows = 5, columns = 4 }) => {
           {Array.from({ length: columns }, (_, colIndex) => (
             <div
               key={colIndex}
-              className="h-10 bg-gray-200 dark:bg-gray-700 rounded-lg relative overflow-hidden"
+              className="h-10 bg-base-200 rounded-lg relative overflow-hidden"
             >
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-base-content/5 to-transparent"
                 animate={{
                   x: ["-100%", "100%"],
                 }}
@@ -211,12 +211,12 @@ export const StatsCardSkeleton = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-sm"
+      className="p-6 rounded-2xl bg-base-100 border border-base-200 shadow-sm"
     >
       {/* Icon skeleton */}
-      <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-xl mb-4 relative overflow-hidden">
+      <div className="w-12 h-12 bg-base-300 rounded-xl mb-4 relative overflow-hidden">
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-base-content/5 to-transparent"
           animate={{
             x: ["-100%", "100%"],
           }}
@@ -229,9 +229,9 @@ export const StatsCardSkeleton = () => {
       </div>
 
       {/* Value skeleton */}
-      <div className="h-8 w-20 bg-gray-200 dark:bg-gray-700 rounded-lg mb-2 relative overflow-hidden">
+      <div className="h-8 w-20 bg-base-300 rounded-lg mb-2 relative overflow-hidden">
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-base-content/5 to-transparent"
           animate={{
             x: ["-100%", "100%"],
           }}
@@ -245,9 +245,9 @@ export const StatsCardSkeleton = () => {
       </div>
 
       {/* Label skeleton */}
-      <div className="h-4 w-24 bg-gray-200 dark:bg-gray-700 rounded relative overflow-hidden">
+      <div className="h-4 w-24 bg-base-300 rounded relative overflow-hidden">
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-base-content/5 to-transparent"
           animate={{
             x: ["-100%", "100%"],
           }}
@@ -266,16 +266,16 @@ export const StatsCardSkeleton = () => {
 export const DetailSkeleton = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-pulse">
-      <div className="h-4 w-48 bg-gray-200 dark:bg-gray-700 rounded mb-8"></div>
+      <div className="h-4 w-48 bg-base-300 rounded mb-8"></div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
-          <div className="h-64 bg-gray-200 dark:bg-gray-700 rounded-2xl"></div>
-          <div className="h-48 bg-gray-200 dark:bg-gray-700 rounded-2xl"></div>
-          <div className="h-96 bg-gray-200 dark:bg-gray-700 rounded-2xl"></div>
+          <div className="h-64 bg-base-300 rounded-2xl"></div>
+          <div className="h-48 bg-base-300 rounded-2xl"></div>
+          <div className="h-96 bg-base-300 rounded-2xl"></div>
         </div>
         <div className="space-y-6">
-          <div className="h-64 bg-gray-200 dark:bg-gray-700 rounded-2xl"></div>
-          <div className="h-32 bg-gray-200 dark:bg-gray-700 rounded-2xl"></div>
+          <div className="h-64 bg-base-300 rounded-2xl"></div>
+          <div className="h-32 bg-base-300 rounded-2xl"></div>
         </div>
       </div>
     </div>

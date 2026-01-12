@@ -169,36 +169,31 @@ const FAQ = () => {
   const getColorClasses = (color) => {
     const colorMap = {
       blue: {
-        bg: "bg-blue-50 dark:bg-blue-900/20",
-        text: "text-blue-700 dark:text-blue-300",
-        border: "border-blue-200 dark:border-blue-800",
+        bg: "bg-info/10",
+        text: "text-info",
       },
       green: {
-        bg: "bg-green-50 dark:bg-green-900/20",
-        text: "text-green-700 dark:text-green-300",
-        border: "border-green-200 dark:border-green-800",
+        bg: "bg-success/10",
+        text: "text-success",
       },
       purple: {
-        bg: "bg-purple-50 dark:bg-purple-900/20",
-        text: "text-purple-700 dark:text-purple-300",
-        border: "border-purple-200 dark:border-purple-800",
+        bg: "bg-secondary/10",
+        text: "text-secondary",
       },
       orange: {
-        bg: "bg-orange-50 dark:bg-orange-900/20",
-        text: "text-orange-700 dark:text-orange-300",
-        border: "border-orange-200 dark:border-orange-800",
+        bg: "bg-warning/10",
+        text: "text-warning",
       },
       red: {
-        bg: "bg-red-50 dark:bg-red-900/20",
-        text: "text-red-700 dark:text-red-300",
-        border: "border-red-200 dark:border-red-800",
+        bg: "bg-error/10",
+        text: "text-error",
       },
     };
     return colorMap[color] || colorMap.blue;
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-gradient-page">
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Header */}
         <motion.div
@@ -207,14 +202,14 @@ const FAQ = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300 text-sm font-semibold mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-warning/10 text-warning text-sm font-semibold mb-4">
             <MdQuestionAnswer className="text-base" />
             <span>Help Center</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">
+          <h1 className="text-4xl sm:text-5xl font-black text-base-content mb-4 tracking-tight">
             Frequently Asked Questions
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-base-content/60 max-w-2xl mx-auto">
             Find answers to common questions about CityFix and how it works
           </p>
         </motion.div>
@@ -227,13 +222,13 @@ const FAQ = () => {
           className="mb-8"
         >
           <div className="relative">
-            <MdSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
+            <MdSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-base-content/40 text-xl" />
             <input
               type="text"
               placeholder="Search FAQ..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-lg"
+              className="w-full pl-12 pr-4 py-4 rounded-xl border border-base-300 bg-base-200 text-base-content placeholder-base-content/40 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-lg"
             />
           </div>
         </motion.div>
@@ -255,12 +250,12 @@ const FAQ = () => {
                   delay: 0.3 + categoryIndex * 0.1,
                   ease: "easeOut",
                 }}
-                className="rounded-2xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 overflow-hidden"
+                className="rounded-2xl bg-base-100 border border-base-200 shadow-sm overflow-hidden"
               >
                 {/* Category Header */}
                 <button
                   onClick={() => toggleCategory(category.id)}
-                  className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
+                  className="w-full px-6 py-4 flex items-center justify-between hover:bg-base-200 transition-colors"
                 >
                   <div className="flex items-center gap-3">
                     <div
@@ -269,16 +264,16 @@ const FAQ = () => {
                       <Icon className="text-xl" />
                     </div>
                     <div className="text-left">
-                      <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                      <h2 className="text-lg font-semibold text-base-content">
                         {category.name}
                       </h2>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                      <p className="text-sm text-base-content/50">
                         {category.questions.length} questions
                       </p>
                     </div>
                   </div>
                   <MdExpandMore
-                    className={`text-2xl text-gray-400 transition-transform ${
+                    className={`text-2xl text-base-content/40 transition-transform ${
                       isExpanded ? "rotate-180" : ""
                     }`}
                   />
@@ -290,9 +285,9 @@ const FAQ = () => {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="border-t border-gray-200 dark:border-slate-700"
+                    className="border-t border-base-200"
                   >
-                    <div className="divide-y divide-gray-200 dark:divide-slate-700">
+                    <div className="divide-y divide-base-200">
                       {category.questions.map((item, itemIndex) => {
                         const itemKey = `${category.id}-${itemIndex}`;
                         const isItemExpanded = expandedItems.has(itemKey);
@@ -307,13 +302,13 @@ const FAQ = () => {
                             }}
                             className="group"
                           >
-                            <summary className="px-6 py-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700/30 transition-colors">
+                            <summary className="px-6 py-4 cursor-pointer hover:bg-base-200/50 transition-colors list-none">
                               <div className="flex items-center justify-between">
-                                <h3 className="text-left font-medium text-gray-900 dark:text-white pr-4">
+                                <h3 className="text-left font-medium text-base-content pr-4">
                                   {item.q}
                                 </h3>
                                 <MdExpandMore
-                                  className={`text-xl text-gray-400 transition-transform flex-shrink-0 ${
+                                  className={`text-xl text-base-content/40 transition-transform flex-shrink-0 ${
                                     isItemExpanded ? "rotate-180" : ""
                                   }`}
                                 />
@@ -326,7 +321,7 @@ const FAQ = () => {
                                 transition={{ duration: 0.3 }}
                                 className="px-6 pb-4"
                               >
-                                <p className="text-gray-600 dark:text-gray-400 leading-relaxed pl-6 border-l-4 border-primary/30">
+                                <p className="text-base-content/70 leading-relaxed pl-6 border-l-4 border-primary/30">
                                   {item.a}
                                 </p>
                               </motion.div>
@@ -349,18 +344,18 @@ const FAQ = () => {
             animate={{ opacity: 1 }}
             className="text-center py-20"
           >
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 dark:bg-slate-800 mb-6">
-              <MdQuestionAnswer className="text-4xl text-gray-400" />
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-base-200 mb-6">
+              <MdQuestionAnswer className="text-4xl text-base-content/20" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            <h3 className="text-2xl font-bold text-base-content mb-2">
               No matching questions found
             </h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-6">
+            <p className="text-base-content/60 mb-6">
               Try searching with different keywords
             </p>
             <button
               onClick={() => setSearchTerm("")}
-              className="px-6 py-3 rounded-xl bg-primary text-white font-semibold hover:bg-primary/90 transition-colors"
+              className="px-6 py-3 rounded-xl bg-primary text-primary-content font-semibold hover:bg-primary/90 transition-colors"
             >
               Clear Search
             </button>
@@ -372,7 +367,7 @@ const FAQ = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
-          className="mt-16 p-8 rounded-2xl bg-gradient-to-r from-primary to-blue-600 text-white text-center"
+          className="mt-16 p-8 rounded-2xl bg-linear-to-r from-primary to-blue-600 text-white text-center shadow-xl"
         >
           <h2 className="text-2xl font-bold mb-4">Still have questions?</h2>
           <p className="text-white/90 mb-6 max-w-2xl mx-auto">

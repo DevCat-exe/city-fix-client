@@ -8,7 +8,7 @@ import {
   MdTag
 } from "react-icons/md";
 
-// Mock blog data (same as Blogjsx)
+// Mock blog data (same as Blog.jsx)
 const blogPosts = [
   {
     id: 1,
@@ -161,7 +161,7 @@ const BlogDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800 flex items-center justify-center">
+      <div className="min-h-screen bg-base-100 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent"></div>
       </div>
     );
@@ -169,9 +169,9 @@ const BlogDetail = () => {
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800 flex items-center justify-center">
+      <div className="min-h-screen bg-base-100 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Article Not Found</h1>
+          <h1 className="text-2xl font-bold text-base-content mb-4">Article Not Found</h1>
           <Link to="/blog" className="text-primary hover:underline">
             ← Back to Blog
           </Link>
@@ -181,7 +181,7 @@ const BlogDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-base-100">
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Back Button */}
         <motion.div
@@ -192,7 +192,7 @@ const BlogDetail = () => {
         >
           <Link
             to="/blog"
-            className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+            className="inline-flex items-center gap-2 text-base-content/60 hover:text-primary transition-colors"
           >
             <MdArrowBack className="text-xl" />
             Back to Blog
@@ -214,18 +214,18 @@ const BlogDetail = () => {
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-6 tracking-tight leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-black text-base-content mb-6 tracking-tight leading-tight">
             {post.title}
           </h1>
 
           {/* Meta Information */}
-          <div className="flex flex-wrap items-center gap-6 text-gray-600 dark:text-gray-400 mb-8">
+          <div className="flex flex-wrap items-center gap-6 text-base-content/50 mb-8">
             <div className="flex items-center gap-2">
               <div className="w-10 h-10 rounded-full bg-linear-to-r from-primary to-blue-600 flex items-center justify-center text-white font-semibold text-sm">
                 {post.author.charAt(0)}
               </div>
               <div>
-                <p className="font-medium text-gray-900 dark:text-white">{post.author}</p>
+                <p className="font-medium text-base-content">{post.author}</p>
                 <p className="text-sm">Author</p>
               </div>
             </div>
@@ -251,7 +251,7 @@ const BlogDetail = () => {
           <div className="flex items-center gap-4">
             <button
               onClick={handleShare}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-base-300 bg-base-100 text-base-content/70 hover:bg-base-200 transition-colors"
             >
               <MdShare className="text-lg" />
               Share
@@ -260,7 +260,7 @@ const BlogDetail = () => {
               onClick={handleBookmark}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-colors ${bookmarked
                   ? "border-primary bg-primary/10 text-primary"
-                  : "border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
+                  : "border-base-300 bg-base-100 text-base-content/70 hover:bg-base-200"
                 }`}
             >
               <MdBookmark className={`text-lg ${bookmarked ? "fill-current" : ""}`} />
@@ -276,7 +276,7 @@ const BlogDetail = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="mb-12"
         >
-          <div className="h-64 sm:h-96 rounded-2xl overflow-hidden">
+          <div className="h-64 sm:h-96 rounded-2xl overflow-hidden shadow-lg">
             <img
               src={post.image}
               alt={post.title}
@@ -290,10 +290,10 @@ const BlogDetail = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="prose prose-lg max-w-none"
+          className="prose prose-lg max-w-none data-[theme=dark]:prose-invert"
         >
           <div
-            className="text-gray-700 dark:text-gray-300 leading-relaxed space-y-6"
+            className="text-base-content/80 leading-relaxed space-y-6"
             dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, '<br>') }}
           />
         </motion.div>
@@ -303,11 +303,11 @@ const BlogDetail = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700"
+          className="mt-12 pt-8 border-t border-base-200"
         >
           <div className="flex items-center gap-2 mb-4">
-            <MdTag className="text-xl text-gray-400" />
-            <span className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+            <MdTag className="text-xl text-base-content/40" />
+            <span className="text-sm font-semibold text-base-content/50 uppercase tracking-wider">
               Tags
             </span>
           </div>
@@ -315,7 +315,7 @@ const BlogDetail = () => {
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-1 rounded-full bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-gray-300 text-sm"
+                className="px-3 py-1 rounded-full bg-base-200 text-base-content/70 text-sm"
               >
                 #{tag}
               </span>
@@ -328,9 +328,9 @@ const BlogDetail = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1 }}
-          className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700"
+          className="mt-16 pt-8 border-t border-base-200"
         >
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Related Articles</h2>
+          <h2 className="text-2xl font-bold text-base-content mb-6">Related Articles</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {blogPosts
               .filter(p => p.id !== post.id && p.category === post.category)
@@ -339,15 +339,15 @@ const BlogDetail = () => {
                 <Link
                   key={relatedPost.id}
                   to={`/blog/${relatedPost.id}`}
-                  className="group p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:shadow-lg transition-all"
+                  className="group p-6 rounded-xl bg-base-100 border border-base-200 hover:shadow-lg transition-all"
                 >
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
+                  <h3 className="text-lg font-semibold text-base-content mb-2 group-hover:text-primary transition-colors">
                     {relatedPost.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-2">
+                  <p className="text-base-content/60 text-sm line-clamp-2">
                     {relatedPost.excerpt}
                   </p>
-                  <div className="flex items-center gap-4 mt-4 text-xs text-gray-500 dark:text-gray-400">
+                  <div className="flex items-center gap-4 mt-4 text-xs text-base-content/40">
                     <span>{relatedPost.readTime}</span>
                     <span>{new Date(relatedPost.date).toLocaleDateString()}</span>
                   </div>

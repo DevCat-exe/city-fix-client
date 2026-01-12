@@ -145,7 +145,7 @@ const Blog = () => {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-gradient-page">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Header */}
         <motion.div
@@ -154,14 +154,14 @@ const Blog = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 text-sm font-semibold mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 text-secondary-content dark:text-secondary text-sm font-semibold mb-4">
             <MdNewspaper className="text-base" />
             <span>CityFix Blog</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">
+          <h1 className="text-4xl sm:text-5xl font-black text-base-content mb-4 tracking-tight">
             Stories & Insights
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-base-content/60 max-w-2xl mx-auto">
             Tips, success stories, and insights about building better
             communities
           </p>
@@ -176,7 +176,7 @@ const Blog = () => {
         >
           {/* Search Bar */}
           <div className="relative">
-            <MdSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
+            <MdSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-base-content/40 text-xl" />
             <input
               type="text"
               placeholder="Search articles by title, content, or author..."
@@ -185,7 +185,7 @@ const Blog = () => {
                 setSearch(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+              className="w-full pl-12 pr-4 py-3 rounded-xl border border-base-300 bg-base-200 text-base-content placeholder-base-content/40 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
             />
           </div>
 
@@ -202,8 +202,8 @@ const Blog = () => {
                   }}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                     selectedCategory === category
-                      ? "bg-primary text-white shadow-lg shadow-primary/30"
-                      : "bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-slate-700"
+                      ? "bg-primary text-primary-content shadow-lg shadow-primary/30"
+                      : "bg-base-100 text-base-content/70 border border-base-300 hover:bg-base-200"
                   }`}
                 >
                   {category}
@@ -215,7 +215,7 @@ const Blog = () => {
           {/* Tag Filter */}
           {selectedTag && (
             <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-500 dark:text-gray-400">
+              <span className="text-sm text-base-content/50">
                 Filtering by tag:
               </span>
               <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
@@ -223,7 +223,7 @@ const Blog = () => {
               </span>
               <button
                 onClick={() => setSelectedTag("")}
-                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                className="text-base-content/40 hover:text-base-content transition-colors"
               >
                 ×
               </button>
@@ -239,7 +239,7 @@ const Blog = () => {
             transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
             className="mb-12"
           >
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            <h2 className="text-2xl font-bold text-base-content mb-6">
               Featured Articles
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -256,7 +256,7 @@ const Blog = () => {
                       delay: 0.5 + index * 0.1,
                       ease: "easeOut",
                     }}
-                    className="group rounded-2xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 overflow-hidden hover:shadow-xl transition-all duration-300"
+                    className="group rounded-2xl bg-base-100 border border-base-200 overflow-hidden hover:shadow-xl transition-all duration-300"
                   >
                     <div className="h-64 relative overflow-hidden">
                       <img
@@ -272,13 +272,13 @@ const Blog = () => {
                       </div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary transition-colors">
+                      <h3 className="text-xl font-bold text-base-content mb-3 group-hover:text-primary transition-colors">
                         <Link to={`/blog/${post.id}`}>{post.title}</Link>
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                      <p className="text-base-content/60 mb-4 leading-relaxed">
                         {post.excerpt}
                       </p>
-                      <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
+                      <div className="flex items-center justify-between text-sm text-base-content/50">
                         <div className="flex items-center gap-4">
                           <span className="flex items-center gap-1">
                             <MdPerson className="text-base" />
@@ -315,7 +315,7 @@ const Blog = () => {
                 delay: 0.7 + index * 0.1,
                 ease: "easeOut",
               }}
-              className="group flex flex-col bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 shadow-sm"
+              className="group flex flex-col bg-base-100 rounded-2xl border border-base-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 shadow-sm"
             >
               <div className="h-48 relative overflow-hidden">
                 <img
@@ -331,10 +331,10 @@ const Blog = () => {
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                <h3 className="text-lg font-bold text-base-content mb-3 group-hover:text-primary transition-colors line-clamp-2">
                   <Link to={`/blog/${post.id}`}>{post.title}</Link>
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed line-clamp-3">
+                <p className="text-base-content/60 mb-4 leading-relaxed line-clamp-3">
                   {post.excerpt}
                 </p>
 
@@ -347,14 +347,14 @@ const Blog = () => {
                         setSelectedTag(tag);
                         setCurrentPage(1);
                       }}
-                      className="px-2 py-1 rounded-full bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-gray-300 text-xs hover:bg-primary/10 hover:text-primary transition-colors"
+                      className="px-2 py-1 rounded-full bg-base-200 text-base-content/70 text-xs hover:bg-primary/10 hover:text-primary transition-colors"
                     >
                       #{tag}
                     </button>
                   ))}
                 </div>
 
-                <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
+                <div className="flex items-center justify-between text-sm text-base-content/50">
                   <div className="flex items-center gap-3">
                     <span className="flex items-center gap-1">
                       <MdPerson className="text-base" />
@@ -379,13 +379,13 @@ const Blog = () => {
             animate={{ opacity: 1 }}
             className="text-center py-20"
           >
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 dark:bg-slate-800 mb-6">
-              <MdNewspaper className="text-4xl text-gray-400" />
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-base-200 mb-6">
+              <MdNewspaper className="text-4xl text-base-content/20" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            <h3 className="text-2xl font-bold text-base-content mb-2">
               No articles found
             </h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-6">
+            <p className="text-base-content/60 mb-6">
               Try adjusting your search terms or filters
             </p>
             <button
@@ -413,7 +413,7 @@ const Blog = () => {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="flex items-center gap-2 px-6 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium"
+              className="flex items-center gap-2 px-6 py-3 rounded-xl border border-base-300 bg-base-100 text-base-content hover:bg-base-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium"
             >
               <MdChevronLeft className="text-lg" />
               Previous
@@ -436,8 +436,8 @@ const Blog = () => {
                     onClick={() => handlePageChange(pageNum)}
                     className={`w-10 h-10 rounded-lg font-semibold transition-all ${
                       currentPage === pageNum
-                        ? "bg-primary text-white shadow-lg shadow-primary/30"
-                        : "bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-slate-700"
+                        ? "bg-primary text-primary-content shadow-lg shadow-primary/30"
+                        : "bg-base-100 text-base-content border border-base-300 hover:bg-base-200"
                     }`}
                   >
                     {pageNum}
@@ -448,7 +448,7 @@ const Blog = () => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="flex items-center gap-2 px-6 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium"
+              className="flex items-center gap-2 px-6 py-3 rounded-xl border border-base-300 bg-base-100 text-base-content hover:bg-base-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium"
             >
               Next
               <MdChevronRight className="text-lg" />
